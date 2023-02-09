@@ -1,4 +1,5 @@
 const express = require('express');
+const { isLoggedIn } = require('../middleware/route-guard');
 const router = express.Router();
 
 // get route home page
@@ -7,17 +8,19 @@ router.get("/", (req, res) => {
 });
 
 // get route profile page
-router.get("/profile", (req, res) => {
-  res.render("profile");
+router.get("/profile", isLoggedIn, (req, res) => {
+
+
+  res.render("profile", {user: req.session.user} );
 });
 
 // get route checkout page
-router.get("/checkout", (req, res) => {
+router.get("/checkout", isLoggedIn, (req, res) => {
   res.render("checkout");
 });
 
 // post route check page
-router.post("/checkout", (req, res) => {
+router.post("/checkout", isLoggedIn, (req, res) => {
   res.redirect("/success")
 })
 

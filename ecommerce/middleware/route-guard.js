@@ -14,10 +14,18 @@ const isLoggedIn = (req, res, next) => {
     }
     next()
   }
+
+  const isAdmin = (req, res, next) => {
+    if (req.session.user.isAdmin === false) {
+      return res.redirect('/')
+    }
+    next()
+  }
   
-  
+
   module.exports = {
     isLoggedIn,
     isLoggedOut,
+    isAdmin,
   }
   

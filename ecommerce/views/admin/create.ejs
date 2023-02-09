@@ -1,1 +1,47 @@
 <h1>create a new product</h1>
+
+<form method="POST" action="/admin/create">
+  <div>
+    <label for="title">title:</label>
+    <input id="title" type="text" name="title" required />
+  </div>
+  <div>
+    <label for="size">size:</label>
+    <input id="size" type="text" name="size" required />
+  </div>
+  <div>
+    <label for="type">type:</label>
+    <select name="type" id="type">
+        <option value="t-shirt">t-shirt</option>
+        <option value="sweater">sweater</option>
+        <option value="jeans">jeans</option>
+        <option value="shoes">shoes</option>
+        <option value="jacket">jacket</option>
+        <option value="hat">hat</option>
+        <option value="blouse">blouse</option>
+        <option value="chinos">chinos</option>
+        <option value="socks">socks</option>
+    </select>
+  </div>
+  <div>
+    <label for="price">price:</label>
+    <input id="price" type="text" name="price" required />
+  </div>
+  <div>
+    <label for="productDetails">productDetails:</label>
+    <input id="productDetails" type="text" name="productDetails" />
+  </div>
+  <div>
+    <label for="available">available:</label>
+    <select name="available" id="available" name="available">
+        <option value="true">true</option>
+        <option value="false">false</option>
+    </select>
+
+  </div>
+  <div>
+    <label for="images">images:</label>
+    <input id="images" type="text" name="images" />
+  </div>
+<button type="submit"> create new product</button>
+</form>
