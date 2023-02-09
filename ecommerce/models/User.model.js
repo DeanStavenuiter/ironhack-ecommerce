@@ -1,24 +1,42 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
-    username: {
+    firstName: {
       type: String,
       trim: true,
-      required: false,
-      unique: true
+      required: true,
+    },
+    lastName: {
+      type: String,
+      trim: true,
+      required: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
       lowercase: true,
-      trim: true
+      trim: true,
     },
-    password: {
+    passwordHash: {
       type: String,
-      required: true
+      required: true,
+    },
+    address: {
+      street: String,
+      houseNumber: Number,
+      postalCode: String,
+      city: String,
+      country: String,
+    },
+    cart: {
+      type: [Schema.Types.ObjectId],
+      ref: "order",
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
     }
   },
   {
@@ -27,6 +45,6 @@ const userSchema = new Schema(
   }
 );
 
-const User = model("User", userSchema);
+const UserModel = model("User", userSchema);
 
-module.exports = User;
+module.exports = UserModel;
