@@ -1,1 +1,23 @@
 <h1>signup</h1>
+
+<form method="post" action="/auth/signup">
+  <div class="">
+    <label for="firstname-signup">first name:</label>
+    <input id="firstname-signup" type="text" placeholder="first name" name="firstname" required/>
+  </div>
+  <div class="">
+    <label for="lastname-signup">last name:</label>
+    <input id="lastname-signup" type="text" placeholder="last name" name="lastname" required/>
+  </div>
+  <div class="">
+    <label for="email-signup">email: </label>
+    <input id="email-signup" type="email" placeholder="email" name="email" required/>
+  </div>
+  <div class="">
+    <label for="password-signup">password: </label>
+    <input id="password-signup" type="password" placeholder="password" name="password" required/>
+  </div>
+  <button type="submit">
+    create an account
+  </button>
+</form>
