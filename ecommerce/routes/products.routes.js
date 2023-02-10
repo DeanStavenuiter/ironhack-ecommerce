@@ -1,8 +1,8 @@
 const express = require('express');
-const { isLoggedIn } = require('../middleware/route-guard');
 const router = express.Router();
-const ProductModel = require("../models/Product.model");
+const { isLoggedIn } = require('../middleware/route-guard');
 const UserModel = require('../models/User.model');
+const ProductModel = require("../models/Product.model");
 
 // get route all products page
 router.get("/", async (req, res) => {
@@ -25,51 +25,30 @@ router.get("/cart", isLoggedIn, async (req, res) =>{
 // post route to add to cart
 router.post("/cart-add", async (req, res) =>{
   const allProducts = await ProductModel.find()
-  const itemClicked = req.body.id
-  const userClick = req.session.user.email
+  const itemIdForm = req.body.id
+  const sessUser = req.session.user.email
 
   // mongoose
-  const query = {email: userClick}
+  const query = {email: sessUser}
   const foundUser = await UserModel.findOne(query)
 
-  // we find the user by email (subject to change) and update the cart property by pushing with mongoose syntax
-
   await foundUser.populate("cart.product")
-  
-  // foundUser.cart.forEach(element => {
-  //   const stringID = JSON.stringify(element.product._id).split(`"`)[1]
-  //   console.log(stringID, itemClicked)
-  //   if (stringID === itemClicked || foundUser.cart.length === 0) {
-  //     console.log("Duplicate")
-  //   }
-  //   else {
-  //     console.log("Not a Duplicate")
-  //   }
-  // })
 
-  const itemExists = foundUser.cart.find(item => {
+  const itemExists = foundUser.cart.some((item) => {
     const stringID = JSON.stringify(item.product._id).split(`"`)[1]
-    console.log(stringID, itemClicked)
-    if (stringID === itemClicked) {
-      return true
-    }
-    else {
-      return false
-    }
+    return stringID === itemIdForm
   })
 
-  console.log(foundUser)
-
-  if(itemExists) {
-    await UserModel.findOneAndUpdate(query, {"$set": {"cart."}} )
-  }else {
-    await UserModel.findOneAndUpdate(query, {"$push": {"cart": {product: itemClicked}}}, {new: true})
-    req.session.user.cart = [...foundUser.cart]
+  // Holy moly code
+  if (!itemExists) {
+    await UserModel.findOneAndUpdate(query, {"$push": {"cart": {product: itemIdForm}}}, {new: true})
+  } else {
+    await UserModel.findOneAndUpdate(query, {"$inc": {"cart.$[item].amount": 1}}, {arrayFilters: [{"item.product": {"$eq": itemIdForm}}]})
   }
-  
-  res.render("products/all-products", { allProducts })
 
   // link the session cart to the user cart in the DB
+  req.session.user.cart = [...foundUser.cart]
+  res.render("products/all-products", { allProducts })
 })
 
 router.post("/cart-delete", async (req, res) =>{
