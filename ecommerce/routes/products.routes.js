@@ -6,8 +6,9 @@ const UserModel = require('../models/User.model');
 
 // get route all products page
 router.get("/", async (req, res) => {
+  const user = req.session.user
   const allProducts = await ProductModel.find()
-  res.render("products/all-products", { allProducts } );
+  res.render("products/all-products", { allProducts, user} );
 });
 
 // get route single product page
@@ -16,8 +17,7 @@ router.get("/details/:id", (req, res) => {
 });
 
 // get route to display the cart
-
-router.get("/cart", async (req, res) =>{
+router.get("/cart",isLoggedIn, async (req, res) =>{
   const user = await UserModel.findOne({email: req.session.user.email}).populate("cart")
   console.log(user)
   res.render("products/cart", {user})
@@ -27,6 +27,7 @@ router.get("/cart", async (req, res) =>{
 router.post("/cart", async (req, res) =>{
   const allProducts = await ProductModel.find()
   const itemClicked = req.body.id
+  const user = req.session.user
   const userClick = req.session.user.email
 
   // we find the user by email (subject to change) and update the cart property by pushing with mongoose syntax
@@ -35,7 +36,7 @@ router.post("/cart", async (req, res) =>{
   // link the session cart to the user cart in the DB
   req.session.user.cart = [...foundUser.cart]
 
-  res.render("products/all-products", { allProducts })
+  res.render("products/all-products", { allProducts}, {user})
 })
 
 

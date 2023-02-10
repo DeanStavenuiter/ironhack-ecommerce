@@ -1,0 +1,20 @@
+header ul{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+li{
+    list-style: none;
+}
+
+header button{
+    background: transparent;
+    border: none;
+}
