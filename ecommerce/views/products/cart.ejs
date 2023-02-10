@@ -1,15 +1,15 @@
 <h1> cart </h1>
 
-<div class="container d-flex justify-content-between">
-    <% user.cart.forEach(product => { %>
+<div class="container d-flex flex-wrap gap-5">
+    <% user.cart.forEach(item => { %>
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="<%- product.images[0] %>" alt="<%= product.title %>">
+            <img class="card-img-top" src="https://react.semantic-ui.com/images/wireframe/image.png" alt="<%= item.product.title %>">
             <div class="card-body">
-              <h3 class="card-title"><%= product.title %></h3>
-              <p class="card-text"><%= product.productDetails %></p>
-              <form method="post" action="/products/cart">
-                <input type="text" name="id" value="<%- product._id %>" hidden>
-                <button type="submit">Add to cart</button>
+              <h3 class="card-title"><%= item.product.title %></h3>
+              <p class="card-text"><%= item.product.productDetails %></p>
+              <form method="post" action="/products/cart-delete">
+                <input type="text" name="id" value="<%- item.product._id %>" hidden>
+                <button type="submit">Remove from cart</button>
                 </form>
             </div>
           </div>

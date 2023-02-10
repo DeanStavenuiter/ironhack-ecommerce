@@ -36,10 +36,17 @@ const userSchema = new Schema(
       city: String,
       country: String,
     },
-    cart: {
-      type: [Schema.Types.ObjectId],
-      ref: "Product",
-    },
+    cart: [{
+      _id : false,
+      product: {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+        },
+      amount: {
+        type: Number,
+        default: 1,
+        },
+    }],
     isAdmin: {
       type: Boolean,
       default: false,
