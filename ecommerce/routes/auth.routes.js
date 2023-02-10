@@ -57,8 +57,8 @@ router.get("/login", isLoggedOut, (req, res) => {
 //post route to sent the login information
 router.post("/login", isLoggedOut, async (req, res) => {
   const body = req.body;
-
-  const userMatch = await UserModel.find({ username: body.username });
+console.log()
+  const userMatch = await UserModel.find({ email: body.email });
   // console.log(userMatch)
   if (userMatch.length) {
     // User found
