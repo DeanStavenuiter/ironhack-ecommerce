@@ -1,7 +1,7 @@
-<h1>all products</h1>
+<h1> cart </h1>
 
 <div class="container d-flex justify-content-between">
-    <% allProducts.forEach(product => { %>
+    <% user.cart.forEach(product => { %>
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="<%- product.images[0] %>" alt="<%= product.title %>">
             <div class="card-body">

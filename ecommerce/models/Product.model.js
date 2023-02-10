@@ -30,7 +30,7 @@ const productSchema = new Schema(
     },
     images: {
       type: [String],
-      default: ["https://react.semantic-ui.com/images/wireframe/image.png"]
+      default: ["https://react.semantic-ui.com/images/wireframe/image.png"],
     },
   },
   {

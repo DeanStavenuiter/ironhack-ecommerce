@@ -29,6 +29,7 @@ router.post("/signup", isLoggedOut, async (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      cart: user.cart,
     };
 
     req.session.user = tempUser;
@@ -72,16 +73,17 @@ console.log()
         lastName: user.lastName,
         email: user.email,
         isAdmin: user.isAdmin,
+        cart: user.cart,
       };
       console.log(tempUser)
 
       req.session.user = tempUser;
       res.redirect("/profile");
     } else {
-      // Incorrect password
+      res.render("auth/login", {error: "Password not found"})
     }
   } else {
-    // User not found
+    res.render("auth/login", {error: "Username not found"})
   }
 });
 

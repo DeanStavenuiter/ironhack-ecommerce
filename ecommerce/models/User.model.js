@@ -38,7 +38,7 @@ const userSchema = new Schema(
     },
     cart: {
       type: [Schema.Types.ObjectId],
-      ref: "order",
+      ref: "Product",
     },
     isAdmin: {
       type: Boolean,
