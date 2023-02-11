@@ -1,8 +1,8 @@
 const express = require('express');
-const { isLoggedIn } = require('../middleware/route-guard');
 const router = express.Router();
-const ProductModel = require("../models/Product.model");
+const { isLoggedIn } = require('../middleware/route-guard');
 const UserModel = require('../models/User.model');
+const ProductModel = require("../models/Product.model");
 
 // get route all products page
 router.get("/", async (req, res) => {
@@ -29,11 +29,26 @@ router.get("/cart", isLoggedIn, async (req, res) =>{
 // post route to add to cart
 router.post("/cart-add", async (req, res) =>{
   const allProducts = await ProductModel.find()
-  const itemClicked = req.body.id
-  const userClick = req.session.user.email
+  const itemIdForm = req.body.id
+  const sessUser = req.session.user.email
 
-  // we find the user by email (subject to change) and update the cart property by pushing with mongoose syntax
-  const foundUser = await UserModel.findOneAndUpdate({email: userClick}, {"$push": {"cart": {product: itemClicked}}}, {new: true})
+  // mongoose
+  const query = {email: sessUser}
+  const foundUser = await UserModel.findOne(query)
+
+  await foundUser.populate("cart.product")
+
+  const itemExists = foundUser.cart.some((item) => {
+    const stringID = JSON.stringify(item.product._id).split(`"`)[1]
+    return stringID === itemIdForm
+  })
+
+  // Holy moly code
+  if (!itemExists) {
+    await UserModel.findOneAndUpdate(query, {"$push": {"cart": {product: itemIdForm}}}, {new: true})
+  } else {
+    await UserModel.findOneAndUpdate(query, {"$inc": {"cart.$[item].amount": 1}}, {arrayFilters: [{"item.product": {"$eq": itemIdForm}}]})
+  }
 
   // link the session cart to the user cart in the DB
   req.session.user.cart = [...foundUser.cart]
