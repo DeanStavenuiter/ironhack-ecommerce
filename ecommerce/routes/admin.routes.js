@@ -1,11 +1,12 @@
 const express = require('express');
-const { isAdmin, isLoggedIn } = require('../middleware/route-guard');
 const router = express.Router();
+const { isAdmin, isLoggedIn } = require('../middleware/route-guard');
 const ProductModel = require("../models/Product.model");
+
 
 // get route admin panel
 router.get("/",isLoggedIn , isAdmin, (req, res) => {
-  res.render("admin/panel");
+  res.render("admin/panel", {layout: "../views/layout-admin.ejs"});
 });
 
 // get route create new product
