@@ -5,12 +5,12 @@ const ProductModel = require("../models/Product.model");
 
 // get route admin panel
 router.get("/",isLoggedIn , isAdmin, (req, res) => {
-  res.render("admin/panel");
+  res.render("admin/panel", {layout: "../views/layout-admin.ejs"});
 });
 
 // get route create new product
 router.get("/create",isLoggedIn, isAdmin , (req, res) => {
-    res.render("admin/create");
+    res.render("admin/create", {layout: "../views/layout-admin.ejs"});
   });
 
 // post route to create new product

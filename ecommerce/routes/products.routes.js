@@ -7,7 +7,6 @@ const ProductModel = require("../models/Product.model");
 // get route all products page
 router.get("/", async (req, res) => {
   const allProducts = await ProductModel.find()
-  console.log(allProducts[0].id)
   res.render("products/all-products", { allProducts, user: req.session.user } );
 });
 
@@ -15,7 +14,6 @@ router.get("/", async (req, res) => {
 router.get("/details/:id", async (req, res) => {
   const productId = req.params.id;
   const product = await ProductModel.findById(productId);
-  console.log(product)
   res.render("products/single-product", { product, user: req.session.user });
 });
 
@@ -23,6 +21,7 @@ router.get("/details/:id", async (req, res) => {
 
 router.get("/cart", isLoggedIn, async (req, res) =>{
   const user = await UserModel.findOne({email: req.session.user.email}).populate("cart.product")
+  console.log(user.cart[0].product.images[0])
   res.render("products/cart", {user})
 })
 
@@ -52,12 +51,8 @@ router.post("/cart-add", async (req, res) =>{
 
   // link the session cart to the user cart in the DB
   req.session.user.cart = [...foundUser.cart]
-<<<<<<< HEAD
 
   res.render("products/all-products", { allProducts, user: req.session.user })
-=======
-  res.render("products/all-products", { allProducts })
->>>>>>> remove-from-cart
 })
 
 router.post("/cart-delete", async (req, res) =>{
