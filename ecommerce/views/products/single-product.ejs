@@ -1,1 +1,141 @@
-<h1>single product</h1>
+<!-- product page -->
+<main class="main-product-page">
+    <div class="product-section">
+      <div class="product-img-big">
+        <img class="img-fluid big-img" src="/<%= product.images[0] %>" alt="<%= product.title%>" />
+        <div class="product-img-small">
+          <ul class="img-list">
+            <% product.images.forEach(image => { %>
+             <li class="single-img"><img src="/<%= image %>" alt="<%= product.title%>"></li>
+            <% }) %>
+            <li><img src="" alt=""></li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-info">
+        <h1 class="product-name">
+            <%= product.title%>
+        </h1>
+        <span class="prize">€ <%= product.price%></span>
+        <div class="product-size">
+          <span class="select-size">select size</span>
+          <span class="material-symbols-outlined expand-more"> expand_more </span>
+        </div>
+        <div class="choose-size hide">
+          <ul>
+            <li>extra-small</li>
+            <li>small</li>
+            <li>medium</li>
+            <li>large</li>
+            <li>extra-large</li>
+          </ul>
+        </div>
+        <button class="buy-now-btn">buy now</button>
+        <div class="info">
+          <h3>Service</h3>
+          <div>
+            <div class="klarna">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.63533 0V16H0V0H3.63533ZM12.7078 0C12.7078 3.3552 11.4546 6.484 9.21263 8.8544L8.99254 9.0808L14.0141 16H9.52692L4.06996 8.48L5.47833 7.4144C7.74092 5.7024 9.06854 3.112 9.14929 0.2752L9.15325 0H12.7078ZM17.0208 12C17.5457 12 18.0492 12.2107 18.4203 12.5858C18.7915 12.9609 19 13.4696 19 14C19 14.5304 18.7915 15.0391 18.4203 15.4142C18.0492 15.7893 17.5457 16 17.0208 16C16.4959 16 15.9925 15.7893 15.6214 15.4142C15.2502 15.0391 15.0417 14.5304 15.0417 14C15.0417 13.4696 15.2502 12.9609 15.6214 12.5858C15.9925 12.2107 16.4959 12 17.0208 12Z"
+                  fill="black"
+                />
+              </svg>
+              Pay afterwards with klarna
+            </div>
+            <div class="shipping">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-package"
+              >
+                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                ></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+              <span>Free shipping above € 100</span>
+            </div>
+            <div class="sending">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-clock"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>Ordered today, next day in house</span>
+            </div>
+          </div>
+          <div class="product-details">
+            <h3>product details</h3>
+            <div class="details">
+              <h4>details</h4>
+              <span class="material-symbols-outlined expand-more">
+                expand_more
+              </span>
+            </div>
+            <div class="details-text hide">
+                <%= console.log(product.details)%>
+                <%= product.productDetails%>
+            </div>
+            <div class="size-and-fit">
+              <h4>size and fit</h4>
+              <span class="material-symbols-outlined expand-more">
+                expand_more
+              </span>
+            </div>
+            <div class="size-and-fit-text hide">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+              ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+              aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+              pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum.
+            </div>
+            <div class="shipping-returning">
+              <h4>shipping and returning</h4>
+              <span class="material-symbols-outlined expand-more">
+                expand_more
+              </span>
+            </div>
+            <div class="shipping-returning-text hide">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+              ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+              aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+              pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/js/single-product.js"></script>
+  

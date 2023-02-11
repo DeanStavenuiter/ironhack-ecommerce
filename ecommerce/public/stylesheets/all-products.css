@@ -1,0 +1,20 @@
+.card{
+    border: none;
+}
+
+.btn{
+    background-color: #d0d0d0;
+}
+
+.card-title{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}

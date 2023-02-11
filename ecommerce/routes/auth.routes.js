@@ -6,7 +6,7 @@ const { isLoggedOut, isLoggedIn } = require("../middleware/route-guard");
 
 //signup get route
 router.get("/signup", isLoggedOut, (req, res) => {
-  res.render("auth/signup");
+  res.render("auth/signup", {user: req.session.user});
 });
 
 //post route to sent the signup information
@@ -30,21 +30,22 @@ router.post("/signup", isLoggedOut, async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       cart: user.cart,
+      images: user.images,
     };
 
     req.session.user = tempUser;
-    res.redirect("/profile");
+    res.redirect("/profile", {user: tempUser});
   } catch (error) {
     if (error.code === 11000) {
       res.render("auth/signup", {
         errorMessage: "Username already used !",
         userData: req.body,
-      });
+      }, {user: req.session.user});
     } else {
       res.render("auth/signup", {
         errorMessage: error,
         userData: req.body,
-      });
+      }, {user: req.session.user});
     }
   }
   // }
@@ -52,7 +53,7 @@ router.post("/signup", isLoggedOut, async (req, res) => {
 
 //login get route
 router.get("/login", isLoggedOut, (req, res) => {
-  res.render("auth/login");
+  res.render("auth/login", {user: req.session.user});
 });
 
 //post route to sent the login information
@@ -78,12 +79,12 @@ console.log()
       console.log(tempUser)
 
       req.session.user = tempUser;
-      res.redirect("/profile");
+      res.redirect("/profile", {tempUser}, {user: req.session.user});
     } else {
-      res.render("auth/login", {error: "Password not found"})
+      res.render("auth/login", {error: "Password not found"}, {user: req.session.user})
     }
   } else {
-    res.render("auth/login", {error: "Username not found"})
+    res.render("auth/login", {error: "Username not found"}, {user: req.session.user})
   }
 });
 

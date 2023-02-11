@@ -1,0 +1,45 @@
+<nav>
+  <ul>
+    <li>
+      <a href="/"><span class="material-symbols-outlined"> home </span></a>
+    </li>
+    <li>
+      <a href="/products/cart">
+        <span class="material-symbols-outlined"> shopping_cart </span>
+      </a>
+    </li>
+    <li>
+      <a href="/products">
+        <span class="material-symbols-outlined"> checkroom </span>
+      </a>
+    </li>
+    <% if (typeof(user) === "undefined") { %>
+    <li>
+      <a href="/auth/login">
+        <span class="material-symbols-outlined"> login </span>
+      </a>
+    </li>
+    <% } %> 
+    <% if (typeof(user) === "undefined") { %>
+    <li>
+      <a href="/auth/signup">
+        <span class="material-symbols-outlined"> person_add </span>
+      </a>
+    </li>
+    <% } %> <% if (typeof(user) !== "undefined") { %>
+    <li>
+      <form method="post" action="/auth/logout">
+        <button type="submit">
+          <span class="material-symbols-outlined"> logout </span>
+        </button>
+      </form>
+    </li>
+    <% } %> <% if (typeof(user) !== "undefined") { %>
+    <li>
+      <a href="/profile">
+        <span class="material-symbols-outlined"> account_circle </span>
+      </a>
+    </li>
+    <% } %>
+  </ul>
+</nav>

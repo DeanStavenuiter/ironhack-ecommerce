@@ -7,12 +7,16 @@ const UserModel = require('../models/User.model');
 // get route all products page
 router.get("/", async (req, res) => {
   const allProducts = await ProductModel.find()
-  res.render("products/all-products", { allProducts } );
+  console.log(allProducts[0].id)
+  res.render("products/all-products", { allProducts, user: req.session.user } );
 });
 
 // get route single product page
-router.get("/details/:id", (req, res) => {
-  res.render("products/single-product");
+router.get("/details/:id", async (req, res) => {
+  const productId = req.params.id;
+  const product = await ProductModel.findById(productId);
+  console.log(product)
+  res.render("products/single-product", { product, user: req.session.user });
 });
 
 // get route to display the cart
@@ -34,7 +38,7 @@ router.post("/cart-add", async (req, res) =>{
   // link the session cart to the user cart in the DB
   req.session.user.cart = [...foundUser.cart]
 
-  res.render("products/all-products", { allProducts })
+  res.render("products/all-products", { allProducts, user: req.session.user })
 })
 
 router.post("/cart-delete", async (req, res) =>{
@@ -51,4 +55,4 @@ router.post("/cart-delete", async (req, res) =>{
 })
 
 
-module.exports = router;
+module.exports = router
