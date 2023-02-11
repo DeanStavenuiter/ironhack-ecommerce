@@ -30,6 +30,7 @@ router.post("/signup", isLoggedOut, async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       cart: user.cart,
+      images: user.images,
     };
 
     req.session.user = tempUser;

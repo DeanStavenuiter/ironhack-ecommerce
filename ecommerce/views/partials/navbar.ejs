@@ -13,19 +13,20 @@
         <span class="material-symbols-outlined"> checkroom </span>
       </a>
     </li>
-    <% if (!user) { %>
+    <% if (typeof(user) === "undefined") { %>
     <li>
       <a href="/auth/login">
         <span class="material-symbols-outlined"> login </span>
       </a>
     </li>
-    <% } %> <% if (!user) { %>
+    <% } %> 
+    <% if (typeof(user) === "undefined") { %>
     <li>
       <a href="/auth/signup">
         <span class="material-symbols-outlined"> person_add </span>
       </a>
     </li>
-    <% } %> <% if (user) { %>
+    <% } %> <% if (typeof(user) !== "undefined") { %>
     <li>
       <form method="post" action="/auth/logout">
         <button type="submit">
@@ -33,7 +34,7 @@
         </button>
       </form>
     </li>
-    <% } %> <% if (user) { %>
+    <% } %> <% if (typeof(user) !== "undefined") { %>
     <li>
       <a href="/profile">
         <span class="material-symbols-outlined"> account_circle </span>

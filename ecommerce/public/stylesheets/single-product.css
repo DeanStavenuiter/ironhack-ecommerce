@@ -1,0 +1,189 @@
+.product-section {
+  display: flex;
+}
+.product-info,
+.product-img-big {
+  width: 50%;
+}
+/* .product-img-big img {
+  width: 100%;
+} */
+.img-list {
+  list-style: none;
+  display: flex;
+  justify-content: left;
+  height: 100px;
+  padding: 0;
+}
+
+.product-img-small li {
+  padding: 1px;
+}
+
+/* .product-img-big img:hover {
+  cursor:pointer;
+} */
+
+.img-list > li > img:hover {
+  cursor: pointer;
+}
+
+.img-list > li > img{
+  height: 100%;
+}
+.product-info {
+  padding-left: 50px;
+}
+
+.prize {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.info-size {
+  display: flex;
+  align-items: center;
+  margin: 25px 0;
+}
+
+.info-size span {
+  margin-right: 5px;
+}
+
+.product-size {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: 1px solid rgb(239, 239, 239);
+  border-radius: 4px;
+  margin-top: 25px;
+  padding: 5px 0;
+}
+
+.select-size {
+  padding-left: 35px;
+}
+
+.choose-size {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+  border-left: 1px solid rgb(239, 239, 239);
+  border-right: 1px solid rgb(239, 239, 239);
+  border-bottom: 1px solid rgb(239, 239, 239);
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.choose-size > span {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.choose-size span:last-child {
+  color: rgb(205, 205, 205);
+}
+
+.choose-size > ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0 35px;
+  margin: 0;
+}
+
+.choose-size > ul > li {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 5px 0;
+  border-bottom: 1px solid rgb(239, 239, 239);
+}
+
+.choose-size ul li:last-child {
+  border-bottom: none;
+}
+
+.product-size:hover {
+  cursor: pointer;
+}
+.expand-more {
+  padding-right: 35px;
+}
+.product-info button {
+  width: 100%;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 15px;
+  border-radius: 4px;
+}
+
+button {
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgb(208, 208, 208);
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.info {
+  margin-top: 25px;
+}
+
+.info h3 {
+  margin-top: 50px;
+  border-bottom: 1px solid rgb(239, 239, 239);
+}
+
+.shipping,
+.klarna,
+.sending {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  margin: 5px 0;
+  border-bottom: 1px solid rgb(239, 239, 239);
+}
+
+.shipping svg,
+.klarna svg,
+.sending svg {
+  padding-right: 5px;
+}
+
+.product-details h3 {
+  padding: 5px 0;
+  margin-top: 50px;
+  border-bottom: 1px solid rgb(239, 239, 239);
+}
+
+.details,
+.size-and-fit,
+.shipping-returning {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid rgb(239, 239, 239);
+}
+.product-details h4,
+.product-details span {
+  margin: 15px 0 3px 0;
+}
+.details,
+.size-and-fit,
+.shipping-returning:hover {
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}

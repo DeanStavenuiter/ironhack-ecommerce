@@ -1,17 +1,30 @@
 <h1>all products</h1>
 
 <div class="container d-flex justify-content-between">
-    <% allProducts.forEach(product => { %>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="<%- product.images[0] %>" alt="<%= product.title %>">
-            <div class="card-body">
-              <h3 class="card-title"><%= product.title %></h3>
-              <p class="card-text"><%= product.productDetails %></p>
-              <form method="post" action="/products/cart">
-                <input type="text" name="id" value="<%- product._id %>" hidden>
-                <button type="submit">Add to cart</button>
-                </form>
-            </div>
-          </div>
-    <% }) %>
+  <% allProducts.forEach(product => { %>
+  <div class="card" style="width: 18rem">
+    <img
+      class="card-img-top img-fluid rounded"
+      src="<%- product.images[0] %>"
+      alt="<%= product.title %>"
+    />
+    <div class="card-body">
+      <h5 class="card-title"><%= product.title %></h5>
+
+      <div class="buttons">
+        <form method="post" action="/products/cart">
+          <input type="text" name="id" value="<%- product.id %>" hidden />
+          <button class="btn btn-block btn-buy" type="submit">
+            Add to cart
+          </button>
+        </form>
+        <% console.log(product) %>
+        <% console.log(product.id) %>
+        <a href="/products/details/<%- product.id %>">
+          <button class="btn btn-block btn-buy" type="submit">details</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <% }) %>
 </div>
