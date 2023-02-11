@@ -52,8 +52,12 @@ router.post("/cart-add", async (req, res) =>{
 
   // link the session cart to the user cart in the DB
   req.session.user.cart = [...foundUser.cart]
+<<<<<<< HEAD
 
   res.render("products/all-products", { allProducts, user: req.session.user })
+=======
+  res.render("products/all-products", { allProducts })
+>>>>>>> remove-from-cart
 })
 
 router.post("/cart-delete", async (req, res) =>{
