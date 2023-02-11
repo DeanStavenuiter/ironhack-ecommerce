@@ -34,7 +34,7 @@ router.post("/signup", isLoggedOut, async (req, res) => {
     };
 
     req.session.user = tempUser;
-    res.redirect("/profile", {user: tempUser});
+    res.redirect("/profile");
   } catch (error) {
     if (error.code === 11000) {
       res.render("auth/signup", {

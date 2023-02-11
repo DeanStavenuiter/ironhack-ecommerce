@@ -1,5 +1,12 @@
 <h1> cart </h1>
 
+<% if (user.cart.length === 0) { %>
+ <div>
+  <h3>Your cart is still empty.</h3>
+  <button><a href="/products">Check out our amazing products.</a></button>
+ </div>
+<% } else { %> 
+
 <div class="container d-flex flex-wrap gap-5">
     <% user.cart.forEach(item => { %>
         <div class="card" style="width: 18rem;">
@@ -7,6 +14,21 @@
             <div class="card-body">
               <h3 class="card-title"><%= item.product.title %></h3>
               <p class="card-text"><%= item.product.productDetails %></p>
+              <form method="POST" action="/products/cart-update" data-form-auto-submit="true">
+                <input name="id" value="<%= item.product._id %>" type="text" hidden>
+                <select name="amount" onchange="this.form.submit()">
+                  <option value="1" <% if (item.amount === 1) { %> selected <% } %>>1</option>
+                  <option value="2" <% if (item.amount === 2) { %> selected <% } %>>2</option>
+                  <option value="3" <% if (item.amount === 3) { %> selected <% } %>>3</option>
+                  <option value="4" <% if (item.amount === 4) { %> selected <% } %>>4</option>
+                  <option value="5" <% if (item.amount === 5) { %> selected <% } %>>5</option>
+                  <option value="6" <% if (item.amount === 6) { %> selected <% } %>>6</option>
+                  <option value="7" <% if (item.amount === 7) { %> selected <% } %>>7</option>
+                  <option value="8" <% if (item.amount === 8) { %> selected <% } %>>8</option>
+                  <option value="9" <% if (item.amount === 9) { %> selected <% } %>>9</option>
+                  <option value="10" <% if (item.amount === 10) { %> selected <% } %>>10</option>
+                </select>
+              </form>
               <form method="post" action="/products/cart-delete">
                 <input type="text" name="id" value="<%- item.product._id %>" hidden>
                 <button type="submit">Remove from cart</button>
@@ -15,3 +37,6 @@
           </div>
     <% }) %>
 </div>
+
+<% } %>
+<noscript><input type="submit" value="Submit"></noscript>

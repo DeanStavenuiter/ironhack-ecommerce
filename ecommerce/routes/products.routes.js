@@ -21,7 +21,7 @@ router.get("/details/:id", async (req, res) => {
 
 router.get("/cart", isLoggedIn, async (req, res) =>{
   const user = await UserModel.findOne({email: req.session.user.email}).populate("cart.product")
-  console.log(user.cart[0].product.images[0])
+  console.log(user)
   res.render("products/cart", {user})
 })
 
@@ -64,6 +64,28 @@ router.post("/cart-delete", async (req, res) =>{
 
   // link the session cart to the user cart in the DB
   req.session.user.cart = [...foundUser.cart]
+
+  res.redirect("/products/cart")
+})
+
+
+// post route to update the cart
+router.post("/cart-update", async (req, res) =>{
+  console.log(req.body)
+  const itemAmountForm = req.body.amount
+  const itemIdForm = req.body.id
+  const sessUser = req.session.user.email
+
+  // mongoose
+  const query = {email: sessUser}
+  const foundUser = await UserModel.findOne(query)
+  await foundUser.populate("cart.product")
+  await UserModel.findOneAndUpdate(query, {"$set": {"cart.$[item].amount": itemAmountForm}}, {arrayFilters: [{"item.product": {"$eq": itemIdForm}}]})
+
+  console.log(req.session.user.cart)
+  // link the session cart to the user cart in the DB
+  req.session.user.cart = [...foundUser.cart]
+  console.log(req.session.user.cart)
 
   res.redirect("/products/cart")
 })
