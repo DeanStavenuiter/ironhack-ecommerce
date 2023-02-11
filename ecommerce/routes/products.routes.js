@@ -37,17 +37,24 @@ router.post("/cart-add", async (req, res) =>{
 
   await foundUser.populate("cart.product")
 
+
+  // We check if there's any items in the user's cart that matches the ID that comes with the request
   const itemExists = foundUser.cart.some((item) => {
     const stringID = JSON.stringify(item.product._id).split(`"`)[1]
     return stringID === itemIdForm
   })
-
-  // Holy moly code
+  
+  // itemExists is either going to be true or false
   if (!itemExists) {
+    // If there's no item matching the item that comes with the request, we push the item into the user's cart
     await UserModel.findOneAndUpdate(query, {"$push": {"cart": {product: itemIdForm}}}, {new: true})
   } else {
+    // otherwise we fetch the item that matches the item's ID and we just increase the amount property
     await UserModel.findOneAndUpdate(query, {"$inc": {"cart.$[item].amount": 1}}, {arrayFilters: [{"item.product": {"$eq": itemIdForm}}]})
   }
+
+  // We force the amount to be always 10 or below
+  await UserModel.findOneAndUpdate(query, {"$set": {"cart.$[item].amount": 10}}, {arrayFilters: [{"item.amount": {"$gt": 10}}]})
 
   // link the session cart to the user cart in the DB
   req.session.user.cart = [...foundUser.cart]

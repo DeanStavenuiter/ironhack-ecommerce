@@ -1,6 +1,7 @@
 const express = require("express");
 const { isLoggedIn } = require("../middleware/route-guard");
 const router = express.Router();
+const UserModel = require('../models/User.model');
 
 // get route home page
 router.get("/", (req, res) => {
@@ -13,13 +14,14 @@ router.get("/profile", isLoggedIn, (req, res) => {
 });
 
 // get route checkout page
-router.get("/checkout", isLoggedIn, (req, res) => {
-  res.render("checkout", { user: req.session.user });
+router.get("/checkout", isLoggedIn, async (req, res) => {
+  const user = await UserModel.findOne({email: req.session.user.email}).populate("cart.product")
+  res.render("checkout", { user });
 });
 
 // post route check page
-router.post("/checkout", isLoggedIn, (req, res) => {
-  res.redirect("/success", { user: req.session.user });
-});
+// router.post("/checkout", isLoggedIn, (req, res) => {
+//   res.redirect("/success", { user: req.session.user });
+// });
 
 module.exports = router;
