@@ -15,17 +15,6 @@ closeCart.addEventListener("click", (e) => {
   modal.classList.toggle("hide");
 });
 
-// cartNav.addEventListener("click", (e) => {
-//   if (cart.classList.contains("hide")) {
-//     cart.classList.remove("hide");
-//     cart.classList.toggle("cart-open");
-//   } else if (cart.classList.contains("cart-closed")) {
-//     cart.classList.toggle("cart-closed");
-//     cart.classList.toggle("cart-open");
-//   }
-//   modal.classList.toggle("hide");
-// });
-
 modal.addEventListener("click", (e) => {
   cart.classList.toggle("cart-closed");
   cart.classList.toggle("cart-open");

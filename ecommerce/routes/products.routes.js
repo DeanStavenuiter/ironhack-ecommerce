@@ -4,23 +4,28 @@ const { isLoggedIn } = require("../middleware/route-guard");
 const UserModel = require("../models/User.model");
 const ProductModel = require("../models/Product.model");
 
-// get route all products page
-router.get("/", async (req, res) => {
-  let cartOpen = false;
-  let cart = req.session.user.cart;
+let cartOpen = false;
 
+// get route all products page
+router.get("/", async (req, res, next) => {
+  let cart = req.session.user.cart;
+  console.log(cart)
+  
   const allProducts = await ProductModel.find();
+
   res.render("products/all-products", {
     allProducts,
     user: req.session.user,
     cart,
     cartOpen,
   });
+  next()
+}, () =>{
+  cartOpen = false;
 });
 
 // get route single product page
 router.get("/details/:id", async (req, res) => {
-  let cartOpen = false;
   let cart = req.session.user.cart;
 
   const productId = req.params.id;
@@ -36,7 +41,6 @@ router.get("/details/:id", async (req, res) => {
 // get route to display the cart
 
 router.get("/cart", isLoggedIn, async (req, res) => {
-  let cartOpen = false;
   let cart = req.session.user.cart;
 
   const user = await UserModel.findOne({
@@ -48,17 +52,18 @@ router.get("/cart", isLoggedIn, async (req, res) => {
 
 // post route to add to cart
 router.post("/cart-add", async (req, res) => {
-  let cartOpen = false;
-  let cart = req.session.user.cart;
+  // We check if somebody clicked on the "Add to cart" button
+  if (req.body.cartOpen) {
+    cartOpen = true;
+  }
 
-  const allProducts = await ProductModel.find();
   const itemIdForm = req.body.id;
   const sessUser = req.session.user.email;
-
+  console.log(req.session.user)
   // mongoose
   const query = { email: sessUser };
-  const foundUser = await UserModel.findOne(query);
 
+  const foundUser = await UserModel.findOne(query);
   await foundUser.populate("cart.product");
 
   // We check if there's any items in the user's cart that matches the ID that comes with the request
@@ -74,16 +79,14 @@ router.post("/cart-add", async (req, res) => {
       query,
       { $push: { cart: { product: itemIdForm } } },
       { new: true }
-    );
-    cartOpen = true;
+    )
   } else {
     // otherwise we fetch the item that matches the item's ID and we just increase the amount property
     await UserModel.findOneAndUpdate(
       query,
       { $inc: { "cart.$[item].amount": 1 } },
       { arrayFilters: [{ "item.product": { $eq: itemIdForm } }] }
-    );
-    cartOpen = true;
+    )
   }
 
   // We force the amount to be always 10 or below
@@ -92,9 +95,13 @@ router.post("/cart-add", async (req, res) => {
     { $set: { "cart.$[item].amount": 10 } },
     { arrayFilters: [{ "item.amount": { $gt: 10 } }] }
   );
-    
+
+  const updatedUser = await UserModel.findOne(query).populate("cart.product")
+  await updatedUser.save()
+
   // link the session cart to the user cart in the DB
-  req.session.user.cart = [...foundUser.cart];
+  req.session.user.cart = [...updatedUser.cart];
+
   res.redirect("/products");
 });
 
@@ -117,8 +124,6 @@ router.post("/cart-delete", async (req, res) => {
 
 // post route to update the cart
 router.post("/cart-update", async (req, res) => {
-  let cartOpen = false;
-  let cart = req.session.user.cart;
 
   const itemAmountForm = req.body.amount;
   const itemIdForm = req.body.id;
@@ -134,10 +139,9 @@ router.post("/cart-update", async (req, res) => {
     { arrayFilters: [{ "item.product": { $eq: itemIdForm } }] }
   );
 
-  console.log(req.session.user.cart);
   // link the session cart to the user cart in the DB
+
   req.session.user.cart = [...foundUser.cart];
-  console.log(req.session.user.cart);
 
   res.redirect("/products/cart");
 });

@@ -1,5 +1,5 @@
 <h1>all products</h1>
-
+<%- include('../partials/modal.ejs') %>
 <div class="container d-flex justify-content-between">
   <% allProducts.forEach(product => { %>
   <div class="card" style="width: 18rem">
@@ -14,6 +14,7 @@
       <div class="buttons">
         <form method="post" action="/products/cart-add">
           <input type="text" name="id" value="<%- product.id %>" hidden />
+          <input type="text" name="cartOpen" value="true" hidden />
           <button class="btn btn-block btn-buy" type="submit">
             Add to cart
           </button>
