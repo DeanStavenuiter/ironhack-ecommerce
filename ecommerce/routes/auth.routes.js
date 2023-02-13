@@ -34,7 +34,7 @@ router.post("/signup", isLoggedOut, async (req, res) => {
     };
 
     req.session.user = tempUser;
-    res.redirect("/profile");
+    res.redirect(`/profile/${user.firstName}-${user.lastName}`);
   } catch (error) {
     if (error.code === 11000) {
       res.render("auth/signup", {
@@ -76,10 +76,10 @@ console.log()
         isAdmin: user.isAdmin,
         cart: user.cart,
       };
-      console.log(tempUser)
-
+      // If password is correct, create a session for the user
       req.session.user = tempUser;
-      res.redirect("/profile", {tempUser}, {user: req.session.user});
+
+      res.redirect(`/profile/${user.firstName}-${user.lastName}`);
     } else {
       res.render("auth/login", {error: "Password not found"}, {user: req.session.user})
     }

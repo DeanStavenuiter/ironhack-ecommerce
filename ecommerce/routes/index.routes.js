@@ -5,26 +5,20 @@ const UserModel = require("../models/User.model");
 
 // get route home page
 router.get("/", (req, res) => {
-  let cartOpen = false;
-  let cart = req.session.user.cart;
-  res.render("index", { user: req.session.user, cart, cartOpen });
+  res.render("index", { user: req.session.user });
 });
 
 // get route profile page
-router.get("/profile", isLoggedIn, (req, res) => {
-  let cartOpen = false;
-  let cart = req.session.user.cart;
-  res.render("profile", { user: req.session.user, cart, cartOpen });
+router.get("/profile/:user", isLoggedIn, (req, res) => {
+  res.render("profile", { user: req.session.user });
 });
 
 // get route checkout page
 router.get("/checkout", isLoggedIn, async (req, res) => {
-  let cartOpen = false;
-  let cart = req.session.user.cart;
   const user = await UserModel.findOne({
     email: req.session.user.email,
   }).populate("cart.product");
-  res.render("checkout", { user, cart, cartOpen });
+  res.render("checkout", { user });
 });
 
 // post route check page

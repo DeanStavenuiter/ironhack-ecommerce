@@ -41,7 +41,7 @@
     </li>
     <% } %> <% if (typeof(user) !== "undefined") { %>
     <li>
-      <a href="/profile">
+      <a href=<%= `/profile/${user.firstName}-${user.lastName}` %>>
         <span class="material-symbols-outlined" title="my profile"> account_circle </span>
       </a>
     </li>
