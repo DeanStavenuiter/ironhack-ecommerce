@@ -14,8 +14,8 @@
         <% } %> </div>
       </div>
       <div class="item-list">
+        <% let subtotal = 0; %>
     <% cart.forEach(item => { %>
-        <% console.log(item) %>
         <div class="single-item">
             <div class="single-item-inner">
             <div>
@@ -23,7 +23,7 @@
                 <a href="#">
                     <img
                     class=""
-                    src="/<%-  %>"
+                    src="/<%- item.product.images[0]  %>"
                     alt="<%- item.product.title %>"
                     />
                 </a>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="outer-size">
                     <select name="size" id="">
-                        <option value="small">small</option>
+                        <option value="small">extra-small</option>
                         <option value="small">small</option>
                         <option value="medium">medium</option>
                         <option value="large">large</option>
@@ -61,7 +61,8 @@
                       </form>
                 </div>
                 <div class="outer-price">
-                    <div class="price-item">€<%- Number(item.product.price) * Number(item.amount) %></div>
+                    <% let itemPrice = 0 %>
+                    <div class="price-item">€<%- itemPrice = Number(item.product.price) * Number(item.amount) %></div>
                 </div>
                 </div>
             </div>
@@ -77,6 +78,7 @@
             </div>
             </div>
         </div>
+        <% subtotal += itemPrice %>
     <% }) %>
       </div>
     </div>
@@ -85,7 +87,7 @@
             subtotal: 
         </div>
         <div class="subtotal-price">
-            €
+            €<%- subtotal %>
         </div>
       </div>
   </div>
