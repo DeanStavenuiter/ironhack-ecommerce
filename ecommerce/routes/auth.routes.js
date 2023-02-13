@@ -21,11 +21,11 @@ router.post("/signup", isLoggedOut, async (req, res) => {
 
   delete body.password;
   body.passwordHash = passwordHash;
-  console.log(body);
   try {
     const user = await UserModel.create(body);
 
     const tempUser = {
+      id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
@@ -59,9 +59,7 @@ router.get("/login", isLoggedOut, (req, res) => {
 //post route to sent the login information
 router.post("/login", isLoggedOut, async (req, res) => {
   const body = req.body;
-console.log()
   const userMatch = await UserModel.find({ email: body.email });
-  // console.log(userMatch)
   if (userMatch.length) {
     // User found
     const user = userMatch[0];
@@ -70,6 +68,7 @@ console.log()
       // Correct password
 
       const tempUser = {
+        id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,

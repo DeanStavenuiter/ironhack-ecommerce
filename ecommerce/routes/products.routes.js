@@ -9,7 +9,6 @@ let cartOpen = false;
 // get route all products page
 router.get("/", async (req, res, next) => {
   let cart = req.session.user.cart;
-  console.log(cart)
   
   const allProducts = await ProductModel.find();
 
@@ -58,10 +57,10 @@ router.post("/cart-add", async (req, res) => {
   }
 
   const itemIdForm = req.body.id;
-  const sessUser = req.session.user.email;
+  const sessUser = req.session.user.id;
   console.log(req.session.user)
   // mongoose
-  const query = { email: sessUser };
+  const query = { _id: sessUser };
 
   const foundUser = await UserModel.findOne(query);
   await foundUser.populate("cart.product");
@@ -127,10 +126,10 @@ router.post("/cart-update", async (req, res) => {
 
   const itemAmountForm = req.body.amount;
   const itemIdForm = req.body.id;
-  const sessUser = req.session.user.email;
+  const sessUser = req.session.user.id;
 
   // mongoose
-  const query = { email: sessUser };
+  const query = { _id: sessUser };
   const foundUser = await UserModel.findOne(query);
   await foundUser.populate("cart.product");
   await UserModel.findOneAndUpdate(

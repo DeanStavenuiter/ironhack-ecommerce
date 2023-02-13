@@ -35,6 +35,7 @@ const userSchema = new Schema(
       postalCode: String,
       city: String,
       country: String,
+      complete: Boolean,
     },
     cart: [{
       _id : false,
