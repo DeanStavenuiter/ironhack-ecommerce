@@ -1,3 +1,8 @@
+/* header{
+    top: 25px;
+    position: fixed;
+} */
+
 header ul{
     display: flex;
     align-items: center;
