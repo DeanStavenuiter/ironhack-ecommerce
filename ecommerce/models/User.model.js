@@ -31,7 +31,7 @@ const userSchema = new Schema(
     },
     address: {
       street: String,
-      houseNumber: Number,
+      houseNumber: String,
       postalCode: String,
       city: String,
       country: String,

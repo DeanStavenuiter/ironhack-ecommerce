@@ -4,6 +4,7 @@ const UserModel = require("../models/User.model");
 const bcrypt = require("bcryptjs");
 const { isLoggedOut, isLoggedIn } = require("../middleware/route-guard");
 
+
 //signup get route
 router.get("/signup", isLoggedOut, (req, res) => {
   res.render("auth/signup", {user: req.session.user});
@@ -30,11 +31,10 @@ router.post("/signup", isLoggedOut, async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       cart: user.cart,
-      images: user.images,
     };
 
     req.session.user = tempUser;
-    res.redirect(`/profile/${user.firstName}-${user.lastName}`);
+    res.redirect(`/profile/${user.firstName.split(" ").join("")}-${user.lastName.split(" ").join("")}`);
   } catch (error) {
     if (error.code === 11000) {
       res.render("auth/signup", {
@@ -78,7 +78,7 @@ router.post("/login", isLoggedOut, async (req, res) => {
       // If password is correct, create a session for the user
       req.session.user = tempUser;
 
-      res.redirect(`/profile/${user.firstName}-${user.lastName}`);
+      res.redirect(`/profile/${user.firstName.split(" ").join("")}-${user.lastName.split(" ").join("")}`);
     } else {
       res.render("auth/login", {error: "Password not found"}, {user: req.session.user})
     }

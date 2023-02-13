@@ -18,6 +18,7 @@ router.get("/", async (req, res, next) => {
     cart,
     cartOpen,
   });
+
   next()
 }, () =>{
   cartOpen = false;

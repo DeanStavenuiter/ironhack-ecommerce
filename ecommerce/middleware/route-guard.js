@@ -31,11 +31,13 @@ const addressComplete = (req, res, next) => {
   next();
 };
 
+
+// We make updateAddress a middleware function that can be called onto different routes
 const updateAddress = async (req, res, next) => {
-  const address = { ...req.body, houseNumber: Number(req.body.houseNumber) };
+  const address = { ...req.body};
   for (let property in address) {
     if (typeof property === "undefined") {
-      res.render("profile", { user: req.session.user, error: "FKOFFF" });
+      res.render("profile", { user: req.session.user, error: "All the fields are required. Please fill in the missing ones." });
     } else {
       address.complete = true;
       const sessUser = req.session.user.id;
