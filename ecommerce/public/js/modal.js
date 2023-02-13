@@ -1,11 +1,8 @@
-const cartArr = [];
-
-const cart = document.querySelector(".side-cart");
-const closeCart = document.querySelector(".close-cart");
-const body = document.querySelector("body");
-const modal = document.querySelector(".modal-backdrop");
-const cartNav = document.querySelector(".navitem3");
-const addToCart = document.querySelector(".btn-buy");
+window.addEventListener('load', ()=> {
+  const cart = document.querySelector(".side-cart");
+  const closeCart = document.querySelector(".close-cart");
+  const modal = document.querySelector(".modal-backdrop");
+  const addToCart = document.querySelector(".btn-buy");
 
 closeCart.addEventListener("click", (e) => {
   if (cart.classList.contains("cart-open")) {
@@ -32,6 +29,9 @@ addToCart.addEventListener("click", (e) => {
     modal.classList.toggle("hide");
 });
 
+})
 
 
-const sideCart = document.querySelector('.side-cart')
+
+
+
