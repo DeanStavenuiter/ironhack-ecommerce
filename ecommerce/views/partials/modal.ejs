@@ -1,0 +1,92 @@
+
+
+<div class="side-cart 
+<%= cartOpen ? 'cart-open' : 'hide' %>" 
+<%= cartOpen ? 'style=transform:translateX(-100)' : 'style=transform:translateX(100%)' %>>
+    <button class="close-cart">
+      <span class="material-symbols-outlined"> chevron_left </span>
+      close menu
+    </button>
+    <div class="container">
+      <div class="header-cart">
+        <h4>Cart</h4>
+        <div class="products-amount"><%- cart.length %> product<% if (cart.length > 1) { %>s
+        <% } %> </div>
+      </div>
+      <div class="item-list">
+    <% cart.forEach(item => { %>
+        <% console.log(item) %>
+        <div class="single-item">
+            <div class="single-item-inner">
+            <div>
+                <div class="outer-img">
+                <a href="#">
+                    <img
+                    class=""
+                    src="/<%-  %>"
+                    alt="<%- item.product.title %>"
+                    />
+                </a>
+                </div>
+            </div>
+            <div>
+                <div class="item-details">
+                <div class="outer-name">
+                    <h class="item-name"><%- item.product.title %></h2>
+                </div>
+                <div class="outer-size">
+                    <select name="size" id="">
+                        <option value="small">small</option>
+                        <option value="small">small</option>
+                        <option value="medium">medium</option>
+                        <option value="large">large</option>
+                        <option value="extra-large">extra-large</option>
+                    </select>
+                </div>
+                <div class="outer-input">
+                    <form method="POST" action="/products/cart-update" data-form-auto-submit="true">
+                        <input name="id" value="<%= item.product._id %>" type="text" hidden>
+                        <select name="amount" onchange="this.form.submit()">
+                          <option value="1" <% if (item.amount === 1) { %> selected <% } %>>1</option>
+                          <option value="2" <% if (item.amount === 2) { %> selected <% } %>>2</option>
+                          <option value="3" <% if (item.amount === 3) { %> selected <% } %>>3</option>
+                          <option value="4" <% if (item.amount === 4) { %> selected <% } %>>4</option>
+                          <option value="5" <% if (item.amount === 5) { %> selected <% } %>>5</option>
+                          <option value="6" <% if (item.amount === 6) { %> selected <% } %>>6</option>
+                          <option value="7" <% if (item.amount === 7) { %> selected <% } %>>7</option>
+                          <option value="8" <% if (item.amount === 8) { %> selected <% } %>>8</option>
+                          <option value="9" <% if (item.amount === 9) { %> selected <% } %>>9</option>
+                          <option value="10" <% if (item.amount === 10) { %> selected <% } %>>10</option>
+                        </select>
+                      </form>
+                </div>
+                <div class="outer-price">
+                    <div class="price-item">€<%- Number(item.product.price) * Number(item.amount) %></div>
+                </div>
+                </div>
+            </div>
+            <div>
+                <div class="outer-delete-item">
+                    <form method="post" action="/products/cart-delete">
+                        <input type="text" name="id" value="<%- item.product._id %>" hidden>
+                        <button type="submit">
+                           <span class="material-symbols-outlined close"> close </span> 
+                        </button>
+                        </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    <% }) %>
+      </div>
+    </div>
+    <div class="subtotal-outer">
+        <div class="subtotal-text">
+            subtotal: 
+        </div>
+        <div class="subtotal-price">
+            €
+        </div>
+      </div>
+  </div>
+<div class="modal-backdrop modal-backdrop-open <%= cartOpen ? '' : 'hide' %>"></div>

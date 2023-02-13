@@ -5,7 +5,7 @@
   <div class="card" style="width: 18rem">
     <img
       class="card-img-top img-fluid rounded"
-      src="<%- product.images[0] %>"
+      src="/<%- product.images[0] %>"
       alt="<%= product.title %>"
     />
     <div class="card-body">
@@ -18,8 +18,7 @@
             Add to cart
           </button>
         </form>
-        <% console.log(product) %>
-        <% console.log(product.id) %>
+
         <a href="/products/details/<%- product.id %>">
           <button class="btn btn-block btn-buy" type="submit">details</button>
         </a>

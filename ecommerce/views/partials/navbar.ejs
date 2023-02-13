@@ -1,43 +1,48 @@
 <nav>
   <ul>
     <li>
-      <a href="/"><span class="material-symbols-outlined"> home </span></a>
+      <a href="/"
+        ><span class="material-symbols-outlined" title="home"> home </span></a
+      >
     </li>
+    <% if (typeof(user) !== "undefined") { %>
     <li>
       <a href="/products/cart">
-        <span class="material-symbols-outlined"> shopping_cart </span>
+        <span class="material-symbols-outlined" title="shopping cart">
+          shopping_cart
+        </span>
       </a>
     </li>
     <li>
+      <% } %>
       <a href="/products">
-        <span class="material-symbols-outlined"> checkroom </span>
+        <span class="material-symbols-outlined" title="all products"> checkroom </span>
       </a>
     </li>
     <% if (typeof(user) === "undefined") { %>
     <li>
       <a href="/auth/login">
-        <span class="material-symbols-outlined"> login </span>
+        <span class="material-symbols-outlined" title="login"> login </span>
       </a>
     </li>
-    <% } %> 
-    <% if (typeof(user) === "undefined") { %>
+    <% } %> <% if (typeof(user) === "undefined") { %>
     <li>
       <a href="/auth/signup">
-        <span class="material-symbols-outlined"> person_add </span>
+        <span class="material-symbols-outlined" title="sign-up"> person_add </span>
       </a>
     </li>
     <% } %> <% if (typeof(user) !== "undefined") { %>
     <li>
       <form method="post" action="/auth/logout">
         <button type="submit">
-          <span class="material-symbols-outlined"> logout </span>
+          <span class="material-symbols-outlined" title="logout"> logout </span>
         </button>
       </form>
     </li>
     <% } %> <% if (typeof(user) !== "undefined") { %>
     <li>
       <a href="/profile">
-        <span class="material-symbols-outlined"> account_circle </span>
+        <span class="material-symbols-outlined" title="my profile"> account_circle </span>
       </a>
     </li>
     <% } %>

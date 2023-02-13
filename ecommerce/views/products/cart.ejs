@@ -10,10 +10,9 @@
 <div class="container d-flex flex-wrap gap-5">
     <% user.cart.forEach(item => { %>
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="<%- item.product.images[0] %>" alt="<%= item.product.title %>">
+            <img class="card-img-top" src="/<%- item.product.images[0] %>" alt="<%= item.product.title %>">
             <div class="card-body">
               <h3 class="card-title"><%= item.product.title %></h3>
-              <p class="card-text"><%= item.product.productDetails %></p>
               <form method="POST" action="/products/cart-update" data-form-auto-submit="true">
                 <input name="id" value="<%= item.product._id %>" type="text" hidden>
                 <select name="amount" onchange="this.form.submit()">
