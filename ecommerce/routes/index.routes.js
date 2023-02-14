@@ -1,11 +1,11 @@
 const express = require("express");
 const {
   isLoggedIn,
-  addressComplete,
   updateAddress,
 } = require("../middleware/route-guard");
 const router = express.Router();
 const UserModel = require("../models/User.model");
+const OrderModel = require("../models/Order.model");
 
 // get route home page
 router.get("/", (req, res) => {
@@ -18,8 +18,12 @@ router.get("/", (req, res) => {
 });
 
 // get route profile page
-router.get("/profile/:user", isLoggedIn, (req, res) => {
-  res.render("profile", { user: req.session.user });
+router.get("/profile/:user", isLoggedIn, async (req, res) => {
+  const query = {_id: req.session.user.id}
+  const user = await UserModel.findById(query)
+  const orderHistory = await OrderModel.find({owner: user._id}).populate("owner products.product")
+  console.log(orderHistory)
+  res.render("profile", { user, orderHistory });
 });
 
 // post route profile page - update user address
