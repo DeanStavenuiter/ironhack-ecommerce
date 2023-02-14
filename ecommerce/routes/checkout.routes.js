@@ -19,11 +19,14 @@ router.get("/register", isLoggedIn, async (req, res) => {
 
 router.post("/success", async (req, res) => {
   const owner = req.session.user.id
-  const productsIDs = []
-  req.session.cart.forEach(item => productsIDs.push(item.product))
-  const order = {owner: owner, products: productsIDs, totalPrice: req.body.subtotal}
+  const products = [...req.session.cart]
+  console.log(products)
+
+  const order = {owner: owner, products: products, totalPrice: req.body.subtotal}
   try {
     await OrderModel.create(order)
+    // we empty the cart after the order has been succesfully placed
+    await UserModel.findByIdAndUpdate(owner, {"$set": {cart : []}})
     res.send("Congratulations")
   } catch (error) {
     console.log("There was an error creating the order", error)

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { isLoggedIn } = require("../middleware/route-guard");
+const { isLoggedIn, isLoggedInCart } = require("../middleware/route-guard");
 const UserModel = require("../models/User.model");
 const ProductModel = require("../models/Product.model");
 
@@ -51,7 +51,7 @@ router.get("/cart", isLoggedIn, async (req, res) => {
 });
 
 // post route to add to cart
-router.post("/cart-add", async (req, res) => {
+router.post("/cart-add", isLoggedInCart, async (req, res) => {
   // We check if somebody clicked on the "Add to cart" button
   if (req.body.cartOpen) {
     cartOpen = true;
@@ -140,8 +140,10 @@ router.post("/cart-update", async (req, res) => {
   );
 
   // link the session cart to the user cart in the DB
+  const updatedUser = await UserModel.findOne(query).populate("cart.product")
+  await updatedUser.save()
 
-  req.session.cart = [...foundUser.cart];
+  req.session.cart = [...updatedUser.cart];
 
   res.redirect("/products/cart");
 });

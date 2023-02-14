@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/stylesheets/login-signup.css" />
+
+<h1>You're not logged in or signed up, please do that before you can put stuff in your cart</h1>
+
+<div class="login-outer">
+  <div class="login-inner">
+    <div class="login">
+      <h1>login</h1>
+      <form class="form" method="post" action="/auth/login">
+        <div class="textbox">
+          <input id="email-signup" type="text" name="email" required />
+          <label for="email-signup">email </label>
+          <span class="material-symbols-outlined"> mail </span>
+        </div>
+        <div class="textbox">
+          <input
+            id="password-signup"
+            type="password"
+            name="password"
+            required
+          />
+          <label for="password-signup">password </label>
+          <span class="material-symbols-outlined"> vpn_key </span>
+        </div>
+        <button class="login-signup-btn" type="submit">login</button>
+        <p>Don't have a account yet? Sign up <a href="/auth/signUp">here</a></p>
+      </form>
+    </div>
+  </div>
+</div>

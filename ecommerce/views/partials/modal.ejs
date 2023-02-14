@@ -21,7 +21,7 @@
                 <a href="#">
                     <img
                     class=""
-                    src="/<%- item.product.images[0] %>"
+                    src="/<%- typeof item.product.images !== "undefined" ? item.product.images[0] : "" %>"
                     alt="<%- item.product.title %>"
                     />
                 </a>

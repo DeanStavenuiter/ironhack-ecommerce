@@ -67,4 +67,8 @@ router.post("/profile/update-infos/:user", isLoggedIn, async (req, res) => {
   }
 });
 
+router.get("/not-logged-in", (req, res) => {
+  res.render("not-logged-in");
+});
+
 module.exports = router;

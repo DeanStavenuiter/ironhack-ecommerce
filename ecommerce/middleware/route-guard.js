@@ -17,6 +17,14 @@ const isLoggedOut = (req, res, next) => {
   next();
 };
 
+
+const isLoggedInCart = (req, res, next) => {
+  if (!req.session.user) {
+    return res.redirect("/not-logged-in");
+  }
+  next();
+};
+
 const isAdmin = (req, res, next) => {
   if (req.session.user.isAdmin === false) {
     return res.redirect("/");
@@ -62,4 +70,5 @@ module.exports = {
   isAdmin,
   addressComplete,
   updateAddress,
+  isLoggedInCart,
 };
