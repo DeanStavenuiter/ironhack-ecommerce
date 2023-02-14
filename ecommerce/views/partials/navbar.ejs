@@ -45,6 +45,15 @@
         <span class="material-symbols-outlined" title="my profile"> account_circle </span>
       </a>
     </li>
-    <% } %>
+    <% } %> 
+    <% if (typeof(user) !== "undefined" && user.isAdmin === true) { %>
+      <li>
+        <a href="/admin">
+         
+          <span class="material-symbols-outlined"> admin_panel_settings </span>
+        </a>
+      </li>
+      <% } %>
+    
   </ul>
 </nav>
