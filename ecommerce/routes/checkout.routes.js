@@ -20,7 +20,7 @@ router.get("/register", isLoggedIn, async (req, res) => {
 router.post("/success", async (req, res) => {
   const owner = req.session.user.id
   const productsIDs = []
-  req.session.user.cart.forEach(item => productsIDs.push(item.product))
+  req.session.cart.forEach(item => productsIDs.push(item.product))
   const order = {owner: owner, products: productsIDs, totalPrice: req.body.subtotal}
   try {
     await OrderModel.create(order)

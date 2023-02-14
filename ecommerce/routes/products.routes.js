@@ -8,7 +8,7 @@ let cartOpen = false;
 
 // get route all products page
 router.get("/", async (req, res, next) => {
-  let cart = req.session.user.cart;
+  let cart = req.session.cart;
   
   const allProducts = await ProductModel.find();
 
@@ -26,7 +26,7 @@ router.get("/", async (req, res, next) => {
 
 // get route single product page
 router.get("/details/:id", async (req, res) => {
-  let cart = req.session.user.cart;
+  let cart = req.session.cart;
 
   const productId = req.params.id;
   const product = await ProductModel.findById(productId);
@@ -41,13 +41,13 @@ router.get("/details/:id", async (req, res) => {
 // get route to display the cart
 
 router.get("/cart", isLoggedIn, async (req, res) => {
-  let cart = req.session.user.cart;
+  // let cart = req.session.cart;
 
   const user = await UserModel.findOne({
     email: req.session.user.email,
   }).populate("cart.product");
 
-  res.render("products/cart", { user, cart, cartOpen });
+  res.render("products/cart", { user, cartOpen });
 });
 
 // post route to add to cart
@@ -100,8 +100,8 @@ router.post("/cart-add", async (req, res) => {
   await updatedUser.save()
 
   // link the session cart to the user cart in the DB
-  req.session.user.cart = [...updatedUser.cart];
-
+  req.session.cart = [...updatedUser.cart];
+console.log(req.session)
   res.redirect("/products");
 });
 
@@ -117,7 +117,7 @@ router.post("/cart-delete", async (req, res) => {
   );
 
   // link the session cart to the user cart in the DB
-  req.session.user.cart = [...foundUser.cart];
+  req.session.cart = [...foundUser.cart];
 
   res.redirect("/products/cart");
 });
@@ -141,7 +141,7 @@ router.post("/cart-update", async (req, res) => {
 
   // link the session cart to the user cart in the DB
 
-  req.session.user.cart = [...foundUser.cart];
+  req.session.cart = [...foundUser.cart];
 
   res.redirect("/products/cart");
 });

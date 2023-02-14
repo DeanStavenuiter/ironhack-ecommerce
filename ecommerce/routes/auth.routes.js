@@ -30,10 +30,13 @@ router.post("/signup", isLoggedOut, async (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      cart: user.cart,
     };
 
+   
+
     req.session.user = tempUser;
+    req.session.cart = user.cart;
+    console.log(req.session)
     res.redirect(`/profile/${user.firstName.split(" ").join("")}-${user.lastName.split(" ").join("")}`);
   } catch (error) {
     if (error.code === 11000) {
@@ -73,11 +76,11 @@ router.post("/login", isLoggedOut, async (req, res) => {
         lastName: user.lastName,
         email: user.email,
         isAdmin: user.isAdmin,
-        cart: user.cart,
       };
       // If password is correct, create a session for the user
       req.session.user = tempUser;
-
+      req.session.cart = user.cart;
+console.log(req.session)
       res.redirect(`/profile/${user.firstName.split(" ").join("")}-${user.lastName.split(" ").join("")}`);
     } else {
       res.render("auth/login", {error: "Password not found"}, {user: req.session.user})

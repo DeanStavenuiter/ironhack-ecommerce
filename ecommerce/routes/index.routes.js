@@ -9,7 +9,12 @@ const UserModel = require("../models/User.model");
 
 // get route home page
 router.get("/", (req, res) => {
-  res.render("index", { user: req.session.user });
+  if (typeof req.session.cart === "undefined"){
+    req.session.cart = []
+  } 
+
+  console.log(req.session)
+  res.render("index", { user: req.session.user, cart: req.session.cart });
 });
 
 // get route profile page
