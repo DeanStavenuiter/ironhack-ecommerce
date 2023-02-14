@@ -32,7 +32,13 @@
             <li>extra-large</li>
           </ul>
         </div>
-        <button class="btn-buy">buy now</button>
+        <form method="post" action="/products/cart-add">
+          <input type="text" name="id" value="<%- product.id %>" hidden />
+          <input type="text" name="cartOpen" value="true" hidden />
+          <button class="btn btn-block btn-buy" type="submit">
+            Add to cart
+          </button>
+        </form>
         <div class="info">
           <h3>Service</h3>
           <div>
