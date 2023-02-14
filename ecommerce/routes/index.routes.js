@@ -24,7 +24,7 @@ router.post(
   updateAddress,
   (req, res) => {
     res.redirect(
-      `/profile/${req.session.user.firstName}-${req.session.user.lastName}`
+      `/profile/${req.session.user.firstName.split(" ").join("")}-${req.session.user.lastName.split(" ").join("")}`
     );
   }
 );
@@ -38,7 +38,7 @@ router.post("/profile/update-infos/:user", isLoggedIn, async (req, res) => {
   const personalInfos = { ...req.body };
   for (let property in personalInfos) {
     if (typeof property === "undefined") {
-      res.render("profile", { user: req.session.user, error: "FKOFFF" });
+      res.render("profile", { user: req.session.user, error: "All the fields are required. Please fill in the missing ones." });
     } else {
       const sessUser = req.session.user.id;
       const query = { _id: sessUser };
@@ -53,7 +53,7 @@ router.post("/profile/update-infos/:user", isLoggedIn, async (req, res) => {
         req.session.user.lastName = personalInfos.lastName;
         req.session.user.email = personalInfos.email;
         res.redirect(
-          `/profile/${personalInfos.firstName}-${personalInfos.lastName}`
+          `/profile/${personalInfos.firstName.split(" ").join("")}-${personalInfos.lastName.split(" ").join("")}`
         );
       } catch (error) {
         console.log(error, "There was an error updating the user's infos.");
@@ -61,25 +61,5 @@ router.post("/profile/update-infos/:user", isLoggedIn, async (req, res) => {
     }
   }
 });
-
-// get route checkout page
-router.get("/checkout", isLoggedIn, addressComplete, async (req, res) => {
-  const user = await UserModel.findOne({
-    email: req.session.user.email,
-  }).populate("cart.product");
-  res.render("checkout", { user });
-});
-
-router.get("/checkout/register", isLoggedIn, async (req, res) => {
-  const user = await UserModel.findOne({
-    email: req.session.user.email,
-  }).populate("cart.product");
-  res.render("checkout-register", { user });
-});
-
-// post route check page
-// router.post("/checkout", isLoggedIn, (req, res) => {
-//   res.redirect("/success", { user: req.session.user });
-// });
 
 module.exports = router;

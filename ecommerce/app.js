@@ -36,6 +36,9 @@ app.use('/admin', adminRoutes)
 //product routes
 const productsRoutes = require('./routes/products.routes')
 app.use('/products', productsRoutes)
+//checkout routes
+const checkoutRoutes = require('./routes/checkout.routes')
+app.use('/checkout', checkoutRoutes)
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app)

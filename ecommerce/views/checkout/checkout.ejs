@@ -1,0 +1,31 @@
+<h1>checkout page</h1>
+<% let subtotal = 0 %>
+
+<div class="container d-flex justify-content-between">
+  <% user.cart.forEach(item => { let itemPrice; %>
+  <div class="card" style="width: 18rem">
+    <img
+      class="card-img-top img-fluid rounded"
+      src="<%= item.product.images[0] %>"
+      alt="<%= item.product.title %>"
+    />
+    <div class="card-body">
+      <h5 class="card-title"><%= item.product.title %></h5>
+      <p>Size: <%= item.product.size %></p>
+      <p>Price: <%= item.product.price %></p>
+      <p>Qty: <%= item.amount %></p>
+      <% itemPrice = item.product.price * item.amount %>
+      <p>€ <%= itemPrice %></p>
+      <% subtotal += itemPrice %>
+    </div>
+  </div>
+  <% }) %>
+</div>
+
+<div>
+  <p>€ <%= subtotal %></p>
+  <form method="POST" action="/checkout/success">
+    <input type="number" name="subtotal" value="<%= subtotal %>" hidden>
+    <button type="submit">Pay now</button>
+  </form>
+</div>
