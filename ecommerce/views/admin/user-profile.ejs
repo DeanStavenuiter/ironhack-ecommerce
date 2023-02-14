@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="/stylesheets/profile.css" />
+
+<hr />
+<div class="container d-flex justify-content-between">
+  <section class="col-4">
+ 
+    <img class="pro-pic" 
+    src="https://api.dicebear.com/5.x/thumbs/svg?seed=<%= findUser.firstName %>&radius=30"
+     alt="avatar" />
+
+    <div class="form-group">
+      <label for="profile-street">First name:</label>
+      <p><%- findUser.firstName %></p>
+    </div>
+    <div class="form-group">
+      <label for="profile-stnumber">Second name:</label>
+      <p><%- findUser.lastName %></p>
+    </div>
+    <div class="form-group">
+      <label for="profile-stnumber">Email address:</label>
+      <p><%- findUser.email %></p>
+    </div>
+
+    <div class="row">
+      <div class="col-4 form-group">
+        <label for="profile-stnumber">House number:</label>
+        <p><%- findUser.address.houseNumber %></p>
+      </div>
+      <div class="col-8 form-group">
+        <label for="profile-street">Street:</label>
+        <p><%- findUser.address.street %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4 form-group">
+        <label for="profile-pcode">Postal code: </label>
+        <p><%- findUser.address.postalCode %></p>
+      </div>
+      <div class="col-8 form-group">
+        <label for="profile-city">City: </label>
+        <p><%- findUser.address.city %></p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="profile-country">Country: </label>
+      <p><%- findUser.address.country %></p>
+    </div>
+  </section>
+
+  <section class="col-7">
+    <h4>Order history from :<%- findUser.firstName  %> <%- findUser.lastName  %></h1>
+    <div class="accordion" id="panelsStayOpen">
+      <% orderHistory.forEach((order, ind) => { %>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-heading<%= ind %>">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapse<%= ind %>"
+            aria-expanded="true"
+            aria-controls="panelsStayOpen-collapse<%= ind %>"
+          >
+            Order ID: <%= order._id %>
+          </button>
+        </h2>
+        <div
+          id="panelsStayOpen-collapse<%= ind %>"
+          class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-heading<%= ind %>"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <% order.products.reverse().forEach(item => { %>
+            <!-- This is the container for every item in products array -->
+            <div class="d-flex justify-content-between mb-3">
+              <div class="col-4">
+                <img
+                  class="history-img"
+                  src="/<%- item.product.images[0] %>"
+                  alt="<%= item.product.title %>"
+                />
+              </div>
+              <div class="col-7">
+                <h3><%= item.product.title %></h3>
+                <p>Qty: <%= item.amount %></p>
+                <p>€<%= item.product.price * item.amount %></p>
+              </div>
+            </div>
+            <% }) %>
+            <!-- and it ends here -->
+            <h4>Subtotal: <strong>€<%= order.totalPrice %></strong></h4>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </section>
+</div>

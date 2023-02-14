@@ -104,7 +104,6 @@
     <div class="accordion" id="panelsStayOpen">
 
       <% orderHistory.forEach((order, ind) => { %>
-        <% console.log(ind) %>
         <div class="accordion-item">
           <h2 class="accordion-header" id="panelsStayOpen-heading<%= ind %>">
             <button
@@ -129,7 +128,7 @@
                 <!-- This is the container for every item in products array -->
                 <div class="d-flex justify-content-between mb-3">
                   <div class="col-4">
-                    <img class="history-img" src="<%= item.product.images[0] %>" alt="<%= item.product.title %>">
+                    <img class="history-img" src="/<%- item.product.images[0] %>" alt="<%= item.product.title %>">
                   </div>
                   <div class="col-7">
                     <h3><%= item.product.title %></h3>
