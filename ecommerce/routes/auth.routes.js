@@ -14,9 +14,9 @@ router.get("/signup", isLoggedOut, (req, res) => {
 router.post("/signup", isLoggedOut, async (req, res) => {
   const body = { ...req.body };
 
-  // if (body.password.length < 6) {
-  //   res.render('auth/signup', { errorMessage: 'Password too short', body: req.body })
-  // } else {
+  if (body.password.length < 6) {
+    res.render('auth/register', { errorMessage: 'Password too short', body: req.body })
+  } else {
   const salt = bcrypt.genSaltSync(13);
   const passwordHash = bcrypt.hashSync(body.password, salt);
 
@@ -51,7 +51,7 @@ router.post("/signup", isLoggedOut, async (req, res) => {
       }, {user: req.session.user});
     }
   }
-  // }
+  }
 });
 
 //login get route

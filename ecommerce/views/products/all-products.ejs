@@ -4,9 +4,9 @@
 </div>
 <%- include('../partials/modal.ejs') %>
 <%- include('../partials/filters.ejs') %>
-<div class="container d-flex justify-content-between">
+<div class="container d-flex flex-wrap">
   <% allProducts.forEach(product => { %>
-  <div class="card" style="width: 18rem">
+  <div class="card m-4" style="width: 18rem">
     <img
       class="card-img-top img-fluid rounded"
       src="<%- product.images[0] %>"
