@@ -7,7 +7,7 @@ const { isLoggedOut, isLoggedIn } = require("../middleware/route-guard");
 
 //signup get route
 router.get("/signup", isLoggedOut, (req, res) => {
-  res.render("auth/signup", {user: req.session.user});
+  res.render("auth/register", {user: req.session.user});
 });
 
 //post route to sent the signup information
@@ -40,12 +40,12 @@ router.post("/signup", isLoggedOut, async (req, res) => {
     res.redirect(`/profile/${user.firstName.split(" ").join("")}-${user.lastName.split(" ").join("")}`);
   } catch (error) {
     if (error.code === 11000) {
-      res.render("auth/signup", {
+      res.render("auth/register", {
         errorMessage: "Username already used !",
         userData: req.body,
       }, {user: req.session.user});
     } else {
-      res.render("auth/signup", {
+      res.render("auth/register", {
         errorMessage: error,
         userData: req.body,
       }, {user: req.session.user});
