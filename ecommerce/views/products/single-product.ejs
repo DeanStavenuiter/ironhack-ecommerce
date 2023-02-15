@@ -16,7 +16,7 @@
         <h1 class="product-name">
             <%= product.title%>
         </h1>
-        <span class="prize">€ <%= product.price%></span>
+        <span class="prize">€ <%= Number.parseFloat(product.price).toFixed(2) %></span>
         <div class="product-size">
           <span class="select-size">select size</span>
           <span class="material-symbols-outlined expand-more"> expand_more </span>

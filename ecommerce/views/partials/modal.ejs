@@ -61,7 +61,7 @@
                 </div>
                 <div class="outer-price">
                     <% let itemPrice = 0 %>
-                    <div class="price-item">€<%- itemPrice = Number(item.product.price) * Number(item.amount) %></div>
+                    <div class="price-item">€<%- itemPrice = Number.parseFloat(item.product.price).toFixed(2) * Number.parseFloat(item.amount).toFixed(2) %></div>
                 </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
             subtotal: 
         </div>
         <div class="subtotal-price">
-            €<%- subtotal %>
+            €<%- Number.parseFloat(subtotal).toFixed(2) %>
         </div>
       </div>
   </div>
