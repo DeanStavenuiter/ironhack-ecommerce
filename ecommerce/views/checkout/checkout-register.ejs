@@ -1,29 +1,5 @@
 <h1>checkout page</h1>
 <% let subtotal = 0 %>
-
-<div class="container d-flex justify-content-between">
-  <% user.cart.forEach(item => { %>
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top img-fluid rounded"
-      src="<%= item.product.images[0] %>"
-      alt="<%= item.product.title %>"
-    />
-    <div class="card-body">
-      <h5 class="card-title"><%= item.product.title %></h5>
-      <p>Size: <%= item.product.size %></p>
-      <p>Price: <%= item.product.price %></p>
-      <p>Qty: <%= item.amount %></p>
-      <% let itemPrice = item.product.price * item.amount %>
-      <p>€ <%= Number.parseFloat(itemPrice).toFixed(2) %></p>
-      <% subtotal += itemPrice %>
-    </div>
-  </div>
-  <% }) %>
-</div>
-
-<p>€ <%= Number.parseFloat(subtotal).toFixed(2) %></p>
-
 <form class="w-25" method="post" action="<%= `/checkout/register` %>">
   <div class="row">
     <div class="col-4 form-group">
@@ -61,3 +37,27 @@
   </div>
   <button class="m-3" type="submit">Update your profile info</button>
 </form>
+
+<div class="container d-flex justify-content-between">
+  <% user.cart.forEach(item => { %>
+  <div class="card" style="width: 18rem">
+    <img
+      class="card-img-top img-fluid rounded"
+      src="<%= item.product.images[0] %>"
+      alt="<%= item.product.title %>"
+    />
+    <div class="card-body">
+      <h5 class="card-title"><%= item.product.title %></h5>
+      <p>Size: <%= item.product.size %></p>
+      <p>Price: <%= item.product.price %></p>
+      <p>Qty: <%= item.amount %></p>
+      <% let itemPrice = item.product.price * item.amount %>
+      <p>€ <%= Number.parseFloat(itemPrice).toFixed(2) %></p>
+      <% subtotal += itemPrice %>
+    </div>
+  </div>
+  <% }) %>
+</div>
+
+<p>€ <%= Number.parseFloat(subtotal).toFixed(2) %></p>
+

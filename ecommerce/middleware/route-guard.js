@@ -59,7 +59,7 @@ const updateAddress = async (req, res, next) => {
         await foundUser.save();
         next();
       } catch (error) {
-        console.log(error, "There was an error updating the user's infos.");
+        console.log("There was an error updating the user's infos.", error);
       }
     }
   }

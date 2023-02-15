@@ -13,6 +13,10 @@ let cartOpen = false;
 
 // get route all products page
 router.get("/", async (req, res, next) => {
+  if (typeof req.session.cart === "undefined"){
+    req.session.cart = []
+  }
+  
   let allProducts = {};
   if (req.session.open) {
     cartOpen = true
@@ -41,12 +45,16 @@ router.get("/", async (req, res, next) => {
     };
     allProducts = await ProductModel.find(query);
   }
-
-  const user = await UserModel.findById(req.session.user.id).populate(
-    "cart.product"
-  );
   delete req.session.open
-  res.render("products/all-products", {allProducts, user: req.session.user, cart: user.cart, cartOpen});
+
+  try {
+    const user = await UserModel.findById(req.session.user.id).populate("cart.product");
+    res.render("products/all-products", {allProducts, user: req.session.user, cart: user.cart, cartOpen});
+  } catch (error) {
+    console.log("There was an error finding the session user", error)
+    res.render("products/all-products", {allProducts, cart: req.session.cart, cartOpen});
+  }
+
 });
 
 // get route single product page

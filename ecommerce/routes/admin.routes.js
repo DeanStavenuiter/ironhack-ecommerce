@@ -32,7 +32,7 @@ router.post("/create", isLoggedIn, isAdmin, async (req, res) => {
   try {
     await ProductModel.create(req.body);
   } catch (error) {
-    console.log(error);
+    console.log("There was an error creating a new product in the DB", error);
   }
 
   res.redirect("/admin");
