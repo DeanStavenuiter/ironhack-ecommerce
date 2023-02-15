@@ -12,21 +12,29 @@ const ProductModel = require("../models/Product.model");
 let cartOpen = false;
 
 // get route all products page
-router.get(
-  "/",
-  async (req, res, next) => {
-    console.log(req.query)
-    if (Object.keys(req.query).length === 0) {
-      const allProducts = await ProductModel.find();
+router.get("/", async (req, res, next) => {
+    console.log(req.originalUrl)
+    let allProducts = {}
+    let priceQuery = 0
+    if (req.query.price == 0) {
+      priceQuery = 9999
     } else {
-      const query = {type: "jeans"}
-      const allProducts = await ProductModel.find(query)
+      priceQuery = req.query.price
     }
-    if (req.headers.referer === "http://localhost:3000/products") {
+    
+    if (Object.keys(req.query).length === 0) {
+      allProducts = await ProductModel.find();
+    } else {
+      const query = {$and: [{type:  {$in: req.query.type}}, {price: {$lte: priceQuery}}]}
+      allProducts = await ProductModel.find(query)
+    }
+
+    if (req.headers.referer === "http://localhost:3000/products" && req.originalUrl === "/products") {
       cartOpen = true;
     } else {
       cartOpen = false;
     }
+
     try {
       const user = await UserModel.findById(req.session.user.id).populate(
         "cart.product"
