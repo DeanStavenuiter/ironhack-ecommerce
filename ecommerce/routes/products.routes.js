@@ -15,8 +15,14 @@ let cartOpen = false;
 router.get(
   "/",
   async (req, res, next) => {
-    const allProducts = await ProductModel.find();
-    if(req.headers.referer === "http://localhost:3000/products"){
+    console.log(req.query)
+    if (Object.keys(req.query).length === 0) {
+      const allProducts = await ProductModel.find();
+    } else {
+      const query = {type: "jeans"}
+      const allProducts = await ProductModel.find(query)
+    }
+    if (req.headers.referer === "http://localhost:3000/products") {
       cartOpen = true;
     } else {
       cartOpen = false;
@@ -26,6 +32,7 @@ router.get(
         "cart.product"
       );
       res.render("products/all-products", {
+        currentURL: "http://localhost:3000/products",
         allProducts,
         user: req.session.user,
         cart: user.cart,
@@ -64,7 +71,7 @@ router.get("/details/:id", async (req, res) => {
     });
 
     next();
-  }catch (error) {
+  } catch (error) {
     let cart = req.session.cart;
     res.render("products/single-product", {
       product,
@@ -73,7 +80,6 @@ router.get("/details/:id", async (req, res) => {
       cartOpen,
     });
   }
-
 });
 
 // get route to display the cart
@@ -103,13 +109,6 @@ router.post("/cart-add", isLoggedInCart, addCart, async (req, res) => {
   res.redirect(`${req.headers.referer}`);
 });
 
-// router.post("/cart-add/details", isLoggedInCart, addCart, async (req, res) => {
-//   if (req.body.cartOpen) {
-//     cartOpen = true;
-//   }
-//   res.redirect(`/products/details/${req.body.id}`);
-// });
-
 router.post("/cart-delete", async (req, res) => {
   const itemClicked = req.body.id;
   const userClick = req.session.user.email;
@@ -128,14 +127,10 @@ router.post("/cart-delete", async (req, res) => {
 });
 
 // post route to update the cart
-router.post(
-  "/cart-update",
-  updateCart,
-  async (req, res) => {
-    cartOpen = true;
+router.post("/cart-update", updateCart, async (req, res) => {
+  cartOpen = true;
 
-    res.redirect(`${req.headers.referer}`);
-  }
-);
+  res.redirect(`${req.headers.referer}`);
+});
 
 module.exports = router;

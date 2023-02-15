@@ -1,0 +1,62 @@
+<form id="fiter-form" method="GET" action="" data-form-auto-submit="true">
+    <div>
+        <h5>Type:</h5>
+        <div class="form-group">
+            <input id="filter-tshirt" type="checkbox" name="type" value="t-shirt">
+            <label for="filter-tshirt">T-shirt</label>
+        </div>
+        <div class="form-group">
+            <input id="filter-sweater" type="checkbox" name="type" value="sweater">
+            <label for="filter-sweater">Sweater</label>
+        </div>
+        <div class="form-group">
+            <input id="filter-jeans" type="checkbox" name="type" value="jeans">
+            <label for="filter-jeans">Jeans</label>
+        </div>
+        <div class="form-group">
+            <input id="filter-shoes" type="checkbox" name="type" value="shoes">
+            <label for="filter-shoes">Shoes</label>
+        </div>
+        <div class="form-group">
+            <input id="filter-jacket" type="checkbox" name="type" value="jacket">
+            <label for="filter-jacket">Jacket</label>
+        </div>
+        <div class="form-group">
+            <input id="filter-hat" type="checkbox" name="type" value="hat">
+            <label for="filter-hat">Hat</label>
+        </div>
+        <div class="form-group">
+            <input id="filter-blouse" type="checkbox" name="type" value="blouse">
+            <label for="filter-blouse">Blouse</label>
+        </div>
+        <div class="form-group">
+            <input id="filter-chinos" type="checkbox" name="type" value="chinos">
+            <label for="filter-chinos">Chinos</label>
+        </div>
+        <div class="form-group">
+            <input id="filter-socks" type="checkbox" name="type" value="socks">
+            <label for="filter-socks">Socks</label>
+        </div>
+    </div>
+    <div>
+        <h5>Price:</h5>
+        <div>
+            <input type="range" name="price" value="0" max="150" oninput="this.nextElementSibling.value = this.value">
+            €<output>any</output>
+        </div>
+    </div>
+    <button type="submit">Apply filters</button>
+</form>
+
+
+<!-- <script>
+    const form = document.getElementById('filter-form');
+    const formData = new FormData(form);
+
+    console.log(formData)
+
+    // for (const [key, value] of formData) {
+    // output.textContent += `${key}: ${value}\n`;
+    // }
+
+</script> -->
