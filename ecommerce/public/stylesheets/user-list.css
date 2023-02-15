@@ -1,3 +1,13 @@
+.user-list{
+    display: flex;
+    justify-content: center;
+    width: 0 auto;
+}
+
+.title{
+    text-align: center;
+}
+
 .item-image img{
     width: 100px;
 }
@@ -16,5 +26,19 @@
 
 .subtotal-order{
     padding-left: 100px;
+    margin-left: 25%;
+}
+
+.inner-btn{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-right: 15px;
+}
+.user-details{
+    display: flex;
+}
+
+.address{
     margin-left: 25%;
 }

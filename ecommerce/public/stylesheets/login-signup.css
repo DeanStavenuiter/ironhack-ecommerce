@@ -1,14 +1,14 @@
-/* body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} */
+.title{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 0 auto;
+}
 .login-outer{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90%;
+    height: 75%;
 }
 
 img:nth-child(1) {

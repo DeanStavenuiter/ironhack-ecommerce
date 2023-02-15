@@ -1,3 +1,14 @@
 .history-img {
     width: 100%;
 }
+
+.inner-btn{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-right: 15px;
+}
+
+.btn{
+    
+}

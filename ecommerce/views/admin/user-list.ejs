@@ -1,67 +1,51 @@
 <link rel="stylesheet" href="/stylesheets/user-list.css" />
 
-<section class="col-7">
-  <h1>all users</h1>
-  <div class="accordion" id="panelsStayOpen">
-    <% findAllUsers.forEach((user, ind) => { %>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="panelsStayOpen-heading<%= ind %>">
-        <button
-          class="accordion-button"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#panelsStayOpen-collapse<%= ind %>"
-          aria-expanded="true"
-          aria-controls="panelsStayOpen-collapse<%= ind %>"
+<div class="user-list">
+  <section class="col-7">
+    <div class="title">
+      <h1>all users</h1>
+    </div>
+    <div class="accordion" id="panelsStayOpen">
+      <% findAllUsers.forEach((user, ind) => { %>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-heading<%= ind %>">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapse<%= ind %>"
+            aria-expanded="true"
+            aria-controls="panelsStayOpen-collapse<%= ind %>"
+          >
+            Name:  <a href="/admin/user-list/<%- user.id %>"><b><%= user.firstName %> <%= user.lastName %></b></a>
+          </button>
+        </h2>
+        <div
+          id="panelsStayOpen-collapse<%= ind %>"
+          class="accordion-collapse collapse"
+          aria-labelledby="panelsStayOpen-heading<%= ind %>"
+          data-bs-parent="#accordionExample"
         >
-          Name:  <a href="/admin/user-list/<%- user.id %>"><b><%= user.firstName %> <%= user.lastName %></b></a>
-        </button>
-      </h2>
-      <div
-        id="panelsStayOpen-collapse<%= ind %>"
-        class="accordion-collapse collapse"
-        aria-labelledby="panelsStayOpen-heading<%= ind %>"
-        data-bs-parent="#accordionExample"
-      >
-        <div class="accordion-body">
-          <% orderHistory.reverse().forEach(order => { %>
-            <%- console.log("ORDERRR OWNER ",order.owner.id) %>
-          <div>
-            <% if (order.owner.id === user.id ) { %>
-            <div>
-              <h4>order id: <b><%-order.id %></b></h4>
-              <div>
-                <% order.products.forEach(product => { %>
-                <div class="item-details">
-                  <div class="item-image">
-                    <img
-                      class="img-fluid"
-                      src="/<%- `${product.product.images[0]}` %>"
-                      alt=""
-                    />
-                  </div>
-                  <div class="item-details-text">
-                    <p>title: <%- `${product.product.title}` %></p>
-                    <p>quantity: <%- `${product.amount}` %></p>
-                    <p>
-                      price: <%- `€${product.product.price * product.amount }`
-                      %>
-                    </p>
-                  </div>
-                </div>
-                <% }) %>
-                <p class="subtotal-order">
-                  subtotal order: <%- `€${order.totalPrice }` %>
-                </p>
-                <hr />
+          <div class="accordion-body">
+            <div class="user-details">
+              <div class="name-email">
+              <p>First name: <%- user.firstName %></p>
+              <p>Last name: <%- user.lastName %></p>
+              <p>Email: <%- user.email %></p>
+              <p>Account created at: <%- user.createdAt.toLocaleDateString() %></p>
               </div>
+            <div class="address">
+              <p>street: <%- user.address.street ? user.address.street : "NA" %></p>
+              <p>house number: <%- user.address.houseNumber ? user.address.houseNumber : "NA" %></p>
+              <p>city: <%- user.address.city ? user.address.city : "NA" %></p>
+              <p>country: <%- user.address.country ? user.address.country : "NA" %></p>
             </div>
-            <% } %>
+            </div>
           </div>
-          <% }) %>
         </div>
       </div>
+      <% }) %>
     </div>
-    <% }) %>
-  </div>
-</section>
+  </section>
+  
+</div>

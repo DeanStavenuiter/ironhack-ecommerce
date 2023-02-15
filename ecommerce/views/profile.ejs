@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="/stylesheets/profile.css" />
 
-<hr>
 <div class="container d-flex justify-content-between">
   <section class="col-4">
     <h1>profile</h1>
@@ -53,7 +52,7 @@
           required
         />
       </div>
-      <button class="m-3" type="submit">Update your personal info</button>
+      <button class="m-3 btn" type="submit">Update your personal info</button>
     </form>
   
     <form
@@ -95,7 +94,7 @@
         typeof user.address === "undefined" ? "" : user.address.country %>"
         placeholder="United Kingdom" name="country" required/>
       </div>
-      <button class="m-3" type="submit">Update your profile info</button>
+      <button class="m-3 btn" type="submit">Update your profile info</button>
     </form>
   </section>
   
@@ -114,7 +113,15 @@
               aria-expanded="true"
               aria-controls="panelsStayOpen-collapse<%= ind %>"
             >
-              Order ID: <%= order._id %>
+            <div class="inner-btn">
+              <div class="order-id">
+Order ID: <%= order._id %>
+              </div>
+              <div class="date">
+<%= order.createdAt.toLocaleDateString()%>
+              </div>
+            </div>
+               
             </button>
           </h2>
           <div
