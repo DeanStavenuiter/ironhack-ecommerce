@@ -1,63 +1,72 @@
-<h1>checkout page</h1>
-<% let subtotal = 0 %>
-<form class="w-25" method="post" action="<%= `/checkout/register` %>">
-  <div class="row">
-    <div class="col-4 form-group">
-      <label for="profile-stnumber">House number:</label>
-      <input class="form-control" id="profile-stnumber" type="text" value="<%=
-      typeof user.address === "undefined" ? "" : user.address.houseNumber %>"
-      placeholder="221b" name="houseNumber" required/>
-    </div>
-    <div class="col-8 form-group">
-      <label for="profile-street">Street:</label>
-      <input class="form-control" id="profile-street" type="text" value="<%=
-      typeof user.address === "undefined" ? "" : user.address.street %>"
-      placeholder="Baker Street" name="street" required/>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-4 form-group">
-      <label for="profile-pcode">Postal code: </label>
-      <input class="form-control" id="profile-pcode" type="text" value="<%= typeof
-      user.address === "undefined" ? "" : user.address.postalCode %>"
-      placeholder="NW1 6XE" name="postalCode" required/>
-    </div>
-    <div class="col-8 form-group">
-      <label for="profile-city">City: </label>
-      <input class="form-control" id="profile-city" type="text" value="<%= typeof
-      user.address === "undefined" ? "" : user.address.city %>"
-      placeholder="London" name="city" required/>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="profile-country">Country: </label>
-    <input class="form-control" id="profile-country" type="text" value="<%=
-    typeof user.address === "undefined" ? "" : user.address.country %>"
-    placeholder="United Kingdom" name="country" required/>
-  </div>
-  <button class="m-3" type="submit">Update your profile info</button>
-</form>
+<link rel="stylesheet" href="/stylesheets/checkout.css" />
 
-<div class="container d-flex justify-content-between">
-  <% user.cart.forEach(item => { %>
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top img-fluid rounded"
-      src="<%= item.product.images[0] %>"
-      alt="<%= item.product.title %>"
-    />
-    <div class="card-body">
-      <h5 class="card-title"><%= item.product.title %></h5>
-      <p>Size: <%= item.product.size %></p>
-      <p>Price: <%= item.product.price %></p>
-      <p>Qty: <%= item.amount %></p>
-      <% let itemPrice = item.product.price * item.amount %>
-      <p>€ <%= Number.parseFloat(itemPrice).toFixed(2) %></p>
-      <% subtotal += itemPrice %>
+<h1 class="mb-5">checkout page</h1>
+
+<main class="container d-flex justify-content-between">
+  <% let subtotal = 0 %>
+  <form class="col-5" method="post" action="<%= `/checkout/register` %>">
+    <h3>Please fill all the fields in the address form to proceed to the payment page</h3>
+    <div class="row">
+      <div class="col-4 form-group">
+        <label for="profile-stnumber">House number:</label>
+        <input class="form-control" id="profile-stnumber" type="text" value="<%=
+        typeof user.address === "undefined" ? "" : user.address.houseNumber %>"
+        placeholder="221b" name="houseNumber" required/>
+      </div>
+      <div class="col-8 form-group">
+        <label for="profile-street">Street:</label>
+        <input class="form-control" id="profile-street" type="text" value="<%=
+        typeof user.address === "undefined" ? "" : user.address.street %>"
+        placeholder="Baker Street" name="street" required/>
+      </div>
     </div>
-  </div>
-  <% }) %>
-</div>
-
-<p>€ <%= Number.parseFloat(subtotal).toFixed(2) %></p>
-
+    <div class="row">
+      <div class="col-4 form-group">
+        <label for="profile-pcode">Postal code: </label>
+        <input class="form-control" id="profile-pcode" type="text" value="<%=
+        typeof user.address === "undefined" ? "" : user.address.postalCode %>"
+        placeholder="NW1 6XE" name="postalCode" required/>
+      </div>
+      <div class="col-8 form-group">
+        <label for="profile-city">City: </label>
+        <input class="form-control" id="profile-city" type="text" value="<%=
+        typeof user.address === "undefined" ? "" : user.address.city %>"
+        placeholder="London" name="city" required/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="profile-country">Country: </label>
+      <input class="form-control" id="profile-country" type="text" value="<%=
+      typeof user.address === "undefined" ? "" : user.address.country %>"
+      placeholder="United Kingdom" name="country" required/>
+    </div>
+    <button class="m-3" type="submit">Update your profile info</button>
+  </form>
+  <section class="col-6">
+    <div class="container d-flex flex-column justify-content-between">
+      <% user.cart.forEach(item => { %>
+      <div class="d-flex justify-content-between" style="height: 8rem">
+        <div class="col-4">
+          <img
+            class="img-fluid rounded img-checkout"
+            src="<%= item.product.images[0] %>"
+            alt="<%= item.product.title %>"
+          />
+        </div>
+        <div class="col-8">
+          <h6><%= item.product.title %></h6>
+          <p>Size: <%= item.product.size %></p>
+          <p>Price: <%= item.product.price %></p>
+          <p>Qty: <%= item.amount %></p>
+          <% let itemPrice = item.product.price * item.amount %>
+          <p>€ <%= Number.parseFloat(itemPrice).toFixed(2) %></p>
+          <% subtotal += itemPrice %>
+        </div>
+      </div>
+      <hr>
+      <% }) %>
+      <p>Subtotal: <strong>€ <%= Number.parseFloat(subtotal).toFixed(2) %></strong></p>
+    </div>
+  
+  </section>
+</main>

@@ -42,3 +42,16 @@
 .address{
     margin-left: 25%;
 }
+
+/* .accordion-button:not(.collapsed) {
+    background-color: white;
+    color: black;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: var(--bs-accordion-btn-icon);
+} */
+
+button {
+    font-family: "Raleway", sans-serif;
+}

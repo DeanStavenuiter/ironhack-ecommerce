@@ -5,26 +5,26 @@
     <div class="title">
       <h1>all users</h1>
     </div>
-    <div class="accordion" id="panelsStayOpen">
+    <div class="accordion accordion-collapse" id="accordion-users">
       <% findAllUsers.forEach((user, ind) => { %>
       <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-heading<%= ind %>">
+        <h2 class="accordion-header" id="accordion-users-heading<%= ind %>">
           <button
-            class="accordion-button"
+            class="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#panelsStayOpen-collapse<%= ind %>"
+            data-bs-target="#accordion-users-collapse<%= ind %>"
             aria-expanded="true"
-            aria-controls="panelsStayOpen-collapse<%= ind %>"
+            aria-controls="accordion-users-collapse<%= ind %>"
           >
-            Name:  <a href="/admin/user-list/<%- user.id %>"><b><%= user.firstName %> <%= user.lastName %></b></a>
+            <span>Name: <a href="/admin/user-list/<%- user.id %>"><b><%= user.firstName %> <%= user.lastName %></b></a></span> 
           </button>
         </h2>
         <div
-          id="panelsStayOpen-collapse<%= ind %>"
+          id="accordion-users-collapse<%= ind %>"
           class="accordion-collapse collapse"
-          aria-labelledby="panelsStayOpen-heading<%= ind %>"
-          data-bs-parent="#accordionExample"
+          aria-labelledby="accordion-users-heading<%= ind %>"
+          data-bs-parent="#accordion-users"
         >
           <div class="accordion-body">
             <div class="user-details">
@@ -35,10 +35,10 @@
               <p>Account created at: <%- user.createdAt.toLocaleDateString() %></p>
               </div>
             <div class="address">
-              <p>street: <%- user.address.street ? user.address.street : "NA" %></p>
-              <p>house number: <%- user.address.houseNumber ? user.address.houseNumber : "NA" %></p>
-              <p>city: <%- user.address.city ? user.address.city : "NA" %></p>
-              <p>country: <%- user.address.country ? user.address.country : "NA" %></p>
+              <p>street: <%- user.address.street ? user.address.street : "n/a" %></p>
+              <p>house number: <%- user.address.houseNumber ? user.address.houseNumber : "n/a" %></p>
+              <p>city: <%- user.address.city ? user.address.city : "n/a" %></p>
+              <p>country: <%- user.address.country ? user.address.country : "n/a" %></p>
             </div>
             </div>
           </div>
@@ -47,5 +47,4 @@
       <% }) %>
     </div>
   </section>
-  
 </div>

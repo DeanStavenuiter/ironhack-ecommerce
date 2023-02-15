@@ -1,0 +1,16 @@
+.img-checkout {
+    height: 100%;
+    object-fit: contain;
+}
+
+h1 {
+    text-align: center;
+}
+
+h6 {
+    font-weight: 600;
+}
+
+section {
+    line-height: 0.5em;
+}
