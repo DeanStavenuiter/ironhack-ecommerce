@@ -5,7 +5,7 @@ const {
 } = require("../middleware/route-guard");
 const router = express.Router();
 const UserModel = require("../models/User.model");
-const OrderModel = require("../models/Order.model");
+const OrderModel = require("../models/Order");
 
 // get route home page
 router.get("/", (req, res) => {

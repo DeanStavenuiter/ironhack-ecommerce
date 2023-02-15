@@ -2,7 +2,7 @@ const express = require("express");
 const { isLoggedIn, addressComplete } = require("../middleware/route-guard");
 const router = express.Router();
 const UserModel = require("../models/User.model");
-const OrderModel = require("../models/Order.model");
+const OrderModel = require("../models/Order");
 
 // get route checkout page
 router.get("/", isLoggedIn, addressComplete, async (req, res) => {

@@ -1,6 +1,6 @@
 const express = require("express");
 const { isAdmin, isLoggedIn } = require("../middleware/route-guard");
-const OrderModel = require("../models/Order.model");
+const OrderModel = require("../models/Order");
 const router = express.Router();
 const ProductModel = require("../models/Product.model");
 const UserModel = require("../models/User.model");
