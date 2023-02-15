@@ -52,18 +52,20 @@ router.get("/", async (req, res, next) => {
 
 // get route single product page
 router.get("/details/:id", async (req, res) => {
+  if (req.session.open) {
+    cartOpen = true
+  } else {
+    cartOpen = false
+  }
+
   const productId = req.params.id;
   const product = await ProductModel.findById(productId);
   try {
     const user = await UserModel.findById(req.session.user.id).populate(
       "cart.product"
     );
-    res.render("products/single-product", {
-      product,
-      user: req.session.user,
-      cart: user.cart,
-      cartOpen,
-    });
+    delete req.session.open
+    res.render("products/single-product", {product, user: req.session.user, cart: user.cart, cartOpen});
   } catch (error) {
     let cart = req.session.cart;
     res.render("products/single-product", {product, user: req.session.user, cart, cartOpen});
@@ -72,21 +74,14 @@ router.get("/details/:id", async (req, res) => {
 
 // get route to display the cart
 
-router.get(
-  "/cart",
-  isLoggedIn,
-  async (req, res) => {
-    // let cart = req.session.cart;
+router.get("/cart", isLoggedIn, async (req, res) => {
 
     const user = await UserModel.findOne({
       email: req.session.user.email,
     }).populate("cart.product");
 
-    res.render("products/cart", { user, cartOpen });
+    res.render("products/cart", { user });
   },
-  () => {
-    cartOpen = false;
-  }
 );
 
 // post route to add to cart
