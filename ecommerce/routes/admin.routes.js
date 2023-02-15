@@ -39,7 +39,7 @@ router.post("/create", isLoggedIn, isAdmin, async (req, res) => {
 });
 
 // get route all users page
-router.get("/user-list", async (req, res) => {
+router.get("/user-list", isLoggedIn, isAdmin, async (req, res) => {
   try {
     const findAllUsers = await UserModel.find();
     const orderHistory = await OrderModel.find().populate(
@@ -56,11 +56,9 @@ router.get("/user-list", async (req, res) => {
 });
 
 //get route to a single user page
-router.get("/user-list/:id", async (req, res) => {
+router.get("/user-list/:id", isLoggedIn, isAdmin, async (req, res) => {
   try {
-
     const findUser = await UserModel.findById(req.params.id);
-  
     const findOrders = await OrderModel.find({ owner: req.params.id }).populate(
       "owner products.product"
     );
