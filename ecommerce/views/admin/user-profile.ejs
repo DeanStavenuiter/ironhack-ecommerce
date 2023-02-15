@@ -62,7 +62,14 @@
             aria-expanded="true"
             aria-controls="panelsStayOpen-collapse<%= ind %>"
           >
-            Order ID: <%= order._id %>
+          <div class="inner-btn">
+            <div class="order-id">
+Order ID: <%= order._id %>
+            </div>
+            <div class="date">
+<%= order.createdAt.toLocaleDateString()%>
+            </div>
+          </div>
           </button>
         </h2>
         <div

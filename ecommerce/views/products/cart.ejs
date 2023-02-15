@@ -1,9 +1,10 @@
-<h1> cart </h1>
+<link rel="stylesheet" href="/stylesheets/cart.css" />
 
+<div class="title">
+<h1> cart </h1>
 <% if (user.cart.length === 0) { %>
- <div>
   <h3>Your cart is still empty.</h3>
-  <button><a href="/products">Check out our amazing products.</a></button>
+  <button class="btn"><a href="/products">Check out our amazing products.</a></button>
  </div>
 <% } else { %> 
 
@@ -30,13 +31,13 @@
               </form>
               <form method="post" action="/products/cart-delete">
                 <input type="text" name="id" value="<%- item.product._id %>" hidden>
-                <button type="submit">Remove from cart</button>
+                <button class="btn" type="submit">Remove from cart</button>
                 </form>
             </div>
           </div>
           
     <% }) %>
 </div>
-<button><a href="/checkout">Checkout</a></button>
+<button class="btn"><a href="/checkout">Checkout</a></button>
 <% } %>
 <noscript><input type="submit" value="Submit"></noscript>

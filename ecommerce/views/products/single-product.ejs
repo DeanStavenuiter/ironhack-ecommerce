@@ -1,7 +1,5 @@
-<!-- product page -->
 <%- include('../partials/modal.ejs') %>
 <main class="main-product-page">
-  
     <div class="product-section">
       <div class="product-img-big">
         <img class="img-fluid big-img" src="/<%= product.images[0] %>" alt="<%= product.title%>" />
@@ -107,7 +105,6 @@
               </span>
             </div>
             <div class="details-text hide">
-                <%= console.log(product.details)%>
                 <%= product.productDetails%>
             </div>
             <div class="size-and-fit">
