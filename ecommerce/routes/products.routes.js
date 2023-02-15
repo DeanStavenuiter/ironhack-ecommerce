@@ -13,55 +13,42 @@ let cartOpen = false;
 
 // get route all products page
 router.get("/", async (req, res, next) => {
-    console.log(req.originalUrl)
-    let allProducts = {}
-    let priceQuery = 0
-    if (req.query.price == 0) {
-      priceQuery = 9999
-    } else {
-      priceQuery = req.query.price
-    }
-    
-    if (Object.keys(req.query).length === 0) {
-      allProducts = await ProductModel.find();
-    } else {
-      const query = {$and: [{type:  {$in: req.query.type}}, {price: {$lte: priceQuery}}]}
-      allProducts = await ProductModel.find(query)
-    }
-
-    if (req.headers.referer === "http://localhost:3000/products" && req.originalUrl === "/products") {
-      cartOpen = true;
-    } else {
-      cartOpen = false;
-    }
-
-    try {
-      const user = await UserModel.findById(req.session.user.id).populate(
-        "cart.product"
-      );
-      res.render("products/all-products", {
-        currentURL: "http://localhost:3000/products",
-        allProducts,
-        user: req.session.user,
-        cart: user.cart,
-        cartOpen,
-      });
-
-      next();
-    } catch (error) {
-      let cart = req.session.cart;
-      res.render("products/all-products", {
-        allProducts,
-        user: req.session.user,
-        cart,
-        cartOpen,
-      });
-    }
-  },
-  () => {
-    cartOpen = false;
+  let allProducts = {};
+  console.log(req.session)
+  if (req.session.open) {
+    cartOpen = true
+  } else {
+    cartOpen = false
   }
-);
+
+  let priceQuery = 0;
+  if (req.query.price == 0) {
+    priceQuery = 9999;
+  } else {
+    priceQuery = req.query.price;
+  }
+
+  // If there's no filter and the query is empty we want to display all the products in the DB
+  if (Object.keys(req.query).length === 0) {
+    allProducts = await ProductModel.find();
+  }
+  // Otherwise we apply the filter queries
+  else {
+    const query = {
+      $and: [
+        { type: { $in: req.query.type } },
+        { price: { $lte: priceQuery } },
+      ],
+    };
+    allProducts = await ProductModel.find(query);
+  }
+
+  const user = await UserModel.findById(req.session.user.id).populate(
+    "cart.product"
+  );
+  delete req.session.open
+  res.render("products/all-products", {allProducts, user: req.session.user, cart: user.cart, cartOpen});
+});
 
 // get route single product page
 router.get("/details/:id", async (req, res) => {
@@ -77,16 +64,9 @@ router.get("/details/:id", async (req, res) => {
       cart: user.cart,
       cartOpen,
     });
-
-    next();
   } catch (error) {
     let cart = req.session.cart;
-    res.render("products/single-product", {
-      product,
-      user: req.session.user,
-      cart,
-      cartOpen,
-    });
+    res.render("products/single-product", {product, user: req.session.user, cart, cartOpen});
   }
 });
 
@@ -111,9 +91,6 @@ router.get(
 
 // post route to add to cart
 router.post("/cart-add", isLoggedInCart, addCart, async (req, res) => {
-  if (req.body.cartOpen) {
-    cartOpen = true;
-  }
   res.redirect(`${req.headers.referer}`);
 });
 
@@ -126,18 +103,21 @@ router.post("/cart-delete", async (req, res) => {
     { email: userClick },
     { $pull: { cart: { product: itemClicked } } },
     { new: true }
-  );
+    );
 
+    if (req.body.cartOpen) {
+      req.session.open = true;
+    }
+
+    req.session.cart = [...foundUser.cart];   
+  
   // link the session cart to the user cart in the DB
-  req.session.cart = [...foundUser.cart];
-
   res.redirect(`${req.headers.referer}`);
 });
 
 // post route to update the cart
 router.post("/cart-update", updateCart, async (req, res) => {
-  cartOpen = true;
-
+  console.log(req.body)
   res.redirect(`${req.headers.referer}`);
 });
 

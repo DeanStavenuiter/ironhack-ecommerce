@@ -30,7 +30,7 @@
             <div>
                 <div class="item-details">
                 <div class="outer-name">
-                    <h class="item-name"><%- item.product.title %></h2>
+                    <h2 class="item-name"><%- item.product.title %></h2>
                 </div>
                 <div class="outer-size">
                     <select name="size" id="">
@@ -44,6 +44,7 @@
                 <div class="outer-input">
                     <form method="POST" action="/products/cart-update" data-form-auto-submit="true">
                         <input name="id" value="<%= item.product._id %>" type="text" hidden>
+                        <input type="text" name="cartOpen" value="true" hidden />
                         <select name="amount" onchange="this.form.submit()">
                           <option value="1" <% if (item.amount === 1) { %> selected <% } %>>1</option>
                           <option value="2" <% if (item.amount === 2) { %> selected <% } %>>2</option>
@@ -68,6 +69,7 @@
                 <div class="outer-delete-item">
                     <form method="post" action="/products/cart-delete">
                         <input type="text" name="id" value="<%- item.product._id %>" hidden>
+                        <input type="text" name="cartOpen" value="true" hidden />
                         <button type="submit">
                            <span class="material-symbols-outlined close"> close </span> 
                         </button>

@@ -31,8 +31,9 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-const addressComplete = (req, res, next) => {
-  if (typeof req.session.user.address === "undefined") {
+const addressComplete = async (req, res, next) => {
+  const user = await UserModel.findById(req.session.user.id)
+  if (!user.address.complete) {
     return res.redirect("/checkout/register");
   }
   next();
@@ -56,7 +57,6 @@ const updateAddress = async (req, res, next) => {
           address: address,
         });
         await foundUser.save();
-        req.session.user.address = address;
         next();
       } catch (error) {
         console.log(error, "There was an error updating the user's infos.");
@@ -85,6 +85,10 @@ const updateCart = async (req, res, next) => {
     await updatedUser.save();
 
     req.session.cart = [...updatedUser.cart];
+
+    if (req.body.cartOpen) {
+      req.session.open = true;
+    }
 
     next();
   } catch (error) {
@@ -137,6 +141,11 @@ const addCart = async (req, res, next) => {
 
     // link the session cart to the user cart in the DB
     req.session.cart = [...updatedUser.cart];
+
+    if (req.body.cartOpen) {
+      req.session.open = true;
+    }
+
     next();
   } catch (error) {
     console.log("There was a problem adding something to the cart!", error);
