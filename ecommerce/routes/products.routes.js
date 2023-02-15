@@ -14,7 +14,6 @@ let cartOpen = false;
 // get route all products page
 router.get("/", async (req, res, next) => {
   let allProducts = {};
-  console.log(req.session)
   if (req.session.open) {
     cartOpen = true
   } else {
@@ -112,7 +111,6 @@ router.post("/cart-delete", async (req, res) => {
 
 // post route to update the cart
 router.post("/cart-update", updateCart, async (req, res) => {
-  console.log(req.body)
   res.redirect(`${req.headers.referer}`);
 });
 

@@ -13,7 +13,6 @@ router.get("/", (req, res) => {
     req.session.cart = []
   } 
 
-  console.log(req.session)
   res.render("index", { user: req.session.user, cart: req.session.cart });
 });
 
@@ -22,7 +21,6 @@ router.get("/profile/:user", isLoggedIn, async (req, res) => {
   const query = {_id: req.session.user.id}
   const user = await UserModel.findById(query)
   const orderHistory = await OrderModel.find({owner: user._id}).populate("owner products.product")
-  // console.log(orderHistory)
   res.render("profile", { user, orderHistory });
 });
 

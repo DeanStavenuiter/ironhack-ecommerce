@@ -2,7 +2,7 @@
 <% let subtotal = 0 %>
 
 <div class="container d-flex justify-content-between">
-  <% user.cart.forEach(item => { let itemPrice; %>
+  <% user.cart.forEach(item => { %>
   <div class="card" style="width: 18rem">
     <img
       class="card-img-top img-fluid rounded"
@@ -14,9 +14,9 @@
       <p>Size: <%= item.product.size %></p>
       <p>Price: <%= item.product.price %></p>
       <p>Qty: <%= item.amount %></p>
-      <% itemPrice = Number.parseFloat(item.product.price).toFixed(2) * Number.parseFloat(item.amount)toFixed(2) %>
+      <% let itemPrice = item.product.price * item.amount %>
       <p>€ <%= Number.parseFloat(itemPrice).toFixed(2) %></p>
-      <% Number.parseFloat(subtotal).toFixed(2) += Number.parseFloat(itemPrice).toFixed(2) %>
+      <% subtotal += itemPrice %>
     </div>
   </div>
   <% }) %>

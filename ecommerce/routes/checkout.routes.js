@@ -20,7 +20,6 @@ router.get("/register", isLoggedIn, async (req, res) => {
 router.post("/success", async (req, res) => {
   const owner = req.session.user.id
   const products = [...req.session.cart]
-  console.log(products)
 
   const order = {owner: owner, products: products, totalPrice: req.body.subtotal}
   try {
