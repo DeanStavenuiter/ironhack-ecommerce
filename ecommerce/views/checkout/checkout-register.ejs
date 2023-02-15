@@ -14,15 +14,15 @@
       <p>Size: <%= item.product.size %></p>
       <p>Price: <%= item.product.price %></p>
       <p>Qty: <%= item.amount %></p>
-      <% itemPrice = item.product.price * item.amount %>
-      <p>€ <%= itemPrice %></p>
-      <% subtotal += itemPrice %>
+      <% itemPrice = Number.parseFloat(item.product.price).toFixed(2) * Number.parseFloat(item.amount)toFixed(2) %>
+      <p>€ <%= Number.parseFloat(itemPrice).toFixed(2) %></p>
+      <% Number.parseFloat(subtotal).toFixed(2) += Number.parseFloat(itemPrice).toFixed(2) %>
     </div>
   </div>
   <% }) %>
 </div>
 
-<p>€ <%= subtotal %></p>
+<p>€ <%= Number.parseFloat(subtotal).toFixed(2) %></p>
 
 <form class="w-25" method="post" action="<%= `/checkout/register` %>">
   <div class="row">

@@ -12,9 +12,9 @@
     <div class="card-body">
       <h5 class="card-title"><%= item.product.title %></h5>
       <p>Size: <%= item.product.size %></p>
-      <p>Price: <%= item.product.price %></p>
+      <p>Price: <%= Number.parseFloat(item.product.price).toFixed(2) %></p>
       <p>Qty: <%= item.amount %></p>
-      <% itemPrice = item.product.price * item.amount %>
+      <% itemPrice = Number.parseFloat(item.product.price).toFixed(2) * Number.parseFloat(item.amount).toFixed(2) %>
       <p>€ <%= itemPrice %></p>
       <% subtotal += itemPrice %>
     </div>
@@ -23,7 +23,7 @@
 </div>
 
 <div>
-  <p>€ <%= subtotal %></p>
+  <p>€ <%= Number.parseFloat(subtotal).toFixed(2) %></p>
   <form method="POST" action="/checkout/success">
     <input type="number" name="subtotal" value="<%= subtotal %>" hidden>
     <button type="submit">Pay now</button>

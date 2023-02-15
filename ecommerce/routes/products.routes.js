@@ -13,7 +13,6 @@ let cartOpen = false;
 
 // get route all products page
 router.get("/", async (req, res, next) => {
-    console.log(req.originalUrl)
     let allProducts = {}
     let priceQuery = 0
     if (req.query.price == 0) {
