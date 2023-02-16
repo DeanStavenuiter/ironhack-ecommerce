@@ -2,7 +2,6 @@
 
 <div class="title d-flex flex-column align-items-center">
   <h1 class="mb-2">Shopping cart</h1>
-  <button class="btn mb-5" id="checkout-btn"><a href="/checkout">Checkout</a></button>
   <% if (user.cart.length === 0) { %>
     <main class="cart-main">
       <h3>Your cart is still empty.</h3>
@@ -12,6 +11,7 @@
     </main>
 </div>
 <% } else { %>
+  <button class="btn mb-5" id="checkout-btn"><a href="/checkout">Checkout</a></button>
 
 <main class="grid cart-main container d-flex flex-wrap justify-content-start gap-5">
   <% user.cart.forEach(item => { %>

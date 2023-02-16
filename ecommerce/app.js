@@ -17,9 +17,9 @@ require('./config/session.config')(app)
 
 // default value for title local
 const capitalize = require('./utils/capitalize')
-const projectName = 'ecommerce'
+const projectName = 'DEAN TOWN'
 
-app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`
+app.locals.appTitle = `${projectName} - ecommerce`
 
 // 👇 Start handling routes here
 const indexRoutes = require('./routes/index.routes')
