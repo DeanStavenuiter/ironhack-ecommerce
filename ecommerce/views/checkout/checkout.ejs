@@ -10,24 +10,12 @@
       alt="avatar"
     />
     <h4>Billing address</h4>
-    <hr>
+    <hr />
     <p><%= user.firstName %> <%= user.lastName %></p>
     <p><%= user.address.street %> <%= user.address.houseNumber %></p>
     <p><%= user.address.postalCode %> <%= user.address.city %></p>
     <p><%= user.address.country %></p>
-    <hr>
-    <div>
-      <form method="POST" action="/checkout/success">
-        <input
-          type="number"
-          name="subtotal"
-          value="<%= Number.parseFloat(subtotal).toFixed(2) %>"
-          hidden
-        />
-        <button class="btn btn-block" type="submit">Pay now</button>
-      </form>
-    </div>
-
+    <hr />
   </section>
 
   <section class="col-6">
@@ -53,10 +41,22 @@
       </div>
       <hr />
       <% }) %>
-      <p>
-        Subtotal:
-        <strong>€ <%= Number.parseFloat(subtotal).toFixed(2) %></strong>
-      </p>
+
+      <div class="row justify-content-around align-items-center">
+        <p class="col-4">
+          Subtotal:
+          <strong>€ <%= Number.parseFloat(subtotal).toFixed(2) %></strong>
+        </p>
+        <form class="col-4" method="POST" action="/checkout/success">
+          <input
+            type="number"
+            name="subtotal"
+            value="<%= Number.parseFloat(subtotal).toFixed(2) %>"
+            hidden
+          />
+          <button class="btn btn-block" type="submit">Pay now</button>
+        </form>
+      </div>
     </div>
   </section>
 </main>

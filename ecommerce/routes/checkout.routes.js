@@ -30,7 +30,7 @@ router.post("/success", async (req, res) => {
     await OrderModel.create(order)
     // we empty the cart after the order has been succesfully placed
     await UserModel.findByIdAndUpdate(owner, {"$set": {cart : []}})
-    res.render("checkout/success")
+    res.render("checkout/success", {user: req.session.user})
   } catch (error) {
     console.log("There was an error creating the order", error)
   }

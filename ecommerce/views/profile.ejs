@@ -111,7 +111,7 @@
     <% } %>
 
     <div class="accordion mb-5" id="accordion-user">
-      <% orderHistory.forEach((order, ind) => { %>
+      <% orderHistory.reverse().forEach((order, ind) => { %>
       <div class="accordion-item">
         <h2 class="accordion-header" id="accordion-user-heading<%= ind %>">
           <button
