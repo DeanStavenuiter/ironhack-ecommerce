@@ -11,7 +11,7 @@
     <% if (allProducts.length === 0) { %>
         <h2>No product matches your filters</h2>
     <% } %>
-    <% allProducts.forEach(product => { %>
+    <% allProducts.reverse().forEach(product => { %>
     <div class="card m-4" style="width: 17rem">
       <img
         class="card-img-top img-fluid rounded"
