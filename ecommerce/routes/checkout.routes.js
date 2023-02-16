@@ -17,6 +17,10 @@ router.get("/register", isLoggedIn, async (req, res) => {
   res.render("checkout/checkout-register", { user });
 });
 
+ router.get("/success", (req, res) => {
+    res.render("checkout/success");
+  })
+  
 router.post("/success", async (req, res) => {
   const owner = req.session.user.id
   const products = [...req.session.cart]
@@ -26,10 +30,11 @@ router.post("/success", async (req, res) => {
     await OrderModel.create(order)
     // we empty the cart after the order has been succesfully placed
     await UserModel.findByIdAndUpdate(owner, {"$set": {cart : []}})
-    res.send("Congratulations")
+    res.render("checkout/success")
   } catch (error) {
     console.log("There was an error creating the order", error)
   }
   });
 
+ 
 module.exports = router;

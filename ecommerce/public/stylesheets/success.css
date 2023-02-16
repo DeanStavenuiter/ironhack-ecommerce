@@ -1,0 +1,8 @@
+#my-canvas{
+    position: absolute;
+    z-index: -9;
+}
+
+.main{
+    min-height: 60vh;
+}
