@@ -1,7 +1,6 @@
 .main-home {
   display: flex;
   flex-direction: column;
-  flex-wrap: ;
   width: 100%;
 }
 .img-main {
