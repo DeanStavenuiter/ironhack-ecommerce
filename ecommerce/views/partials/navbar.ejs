@@ -1,59 +1,67 @@
 <nav>
-  <ul>
-    <li>
-      <a href="/"
-        ><span class="material-symbols-outlined" title="home"> home </span></a
-      >
-    </li>
-    <% if (typeof(user) !== "undefined") { %>
-    <li>
-      <a href="/products/cart">
-        <span class="material-symbols-outlined" title="shopping cart">
-          shopping_cart
-        </span>
-      </a>
-    </li>
-    <li>
-      <% } %>
-      <a href="/products">
-        <span class="material-symbols-outlined" title="all products"> checkroom </span>
-      </a>
-    </li>
-    <% if (typeof(user) === "undefined") { %>
-    <li>
-      <a href="/auth/login">
-        <span class="material-symbols-outlined" title="login"> login </span>
-      </a>
-    </li>
-    <% } %> <% if (typeof(user) === "undefined") { %>
-    <li>
-      <a href="/auth/signup">
-        <span class="material-symbols-outlined" title="sign-up"> person_add </span>
-      </a>
-    </li>
-    <% } %> <% if (typeof(user) !== "undefined") { %>
-    <li>
-      <form method="post" action="/auth/logout">
-        <button type="submit">
-          <span class="material-symbols-outlined" title="logout"> logout </span>
-        </button>
-      </form>
-    </li>
-    <% } %> <% if (typeof(user) !== "undefined") { %>
-    <li>
-      <a href=<%= `/profile/${user.firstName.split(" ").join("")}-${user.lastName.split(" ").join("")}` %>>
-        <span class="material-symbols-outlined" title="my profile"> account_circle </span>
-      </a>
-    </li>
-    <% } %> 
-    <% if (typeof(user) !== "undefined" && user.isAdmin === true) { %>
+  <ul class="d-flex align-items-center">
+    <div class="col-1">
       <li>
-        <a href="/admin">
-         
-          <span class="material-symbols-outlined"> admin_panel_settings </span>
+        <a href="/"><img class="img-fluid" id="logo" src="/images/deantownlogo.png" alt="deantownlogo"></a>
+      </li>
+    </div>
+
+    <div class="d-flex nav-ul col-10">
+      <li>
+        <a href="/"
+        ><span class="material-symbols-outlined" title="home"> home </span></a
+        >
+      </li>
+      <% if (typeof(user) !== "undefined") { %>
+        <li>
+          <a href="/products/cart">
+            <span class="material-symbols-outlined" title="shopping cart">
+              shopping_cart
+            </span>
+          </a>
+        </li>
+        <li>
+          <% } %>
+          <a href="/products">
+            <span class="material-symbols-outlined" title="all products"> checkroom </span>
+          </a>
+        </li>
+        <% if (typeof(user) === "undefined") { %>
+      <li>
+        <a href="/auth/login">
+          <span class="material-symbols-outlined" title="login"> login </span>
         </a>
       </li>
-      <% } %>
+      <% } %> <% if (typeof(user) === "undefined") { %>
+      <li>
+        <a href="/auth/signup">
+          <span class="material-symbols-outlined" title="sign-up"> person_add </span>
+        </a>
+      </li>
+      <% } %> <% if (typeof(user) !== "undefined") { %>
+      <li>
+        <form method="post" action="/auth/logout">
+          <button type="submit">
+            <span class="material-symbols-outlined" title="logout"> logout </span>
+          </button>
+        </form>
+      </li>
+      <% } %> <% if (typeof(user) !== "undefined") { %>
+      <li>
+        <a href=<%= `/profile/${user.firstName.split(" ").join("")}-${user.lastName.split(" ").join("")}` %>>
+          <span class="material-symbols-outlined" title="my profile"> account_circle </span>
+        </a>
+      </li>
+      <% } %> 
+      <% if (typeof(user) !== "undefined" && user.isAdmin === true) { %>
+        <li>
+          <a href="/admin">
+           
+            <span class="material-symbols-outlined"> admin_panel_settings </span>
+          </a>
+        </li>
+        <% } %>
+    </div>
     
   </ul>
 </nav>

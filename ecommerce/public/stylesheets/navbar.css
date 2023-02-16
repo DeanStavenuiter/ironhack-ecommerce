@@ -1,9 +1,8 @@
-/* header{
-    top: 25px;
-    position: fixed;
-} */
+#logo {
+    margin-left: 20%;
+}
 
-header ul{
+.nav-ul{
     display: flex;
     align-items: center;
     gap: 30px;
