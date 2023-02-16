@@ -10,6 +10,9 @@
           <label for="email-signup">email </label>
           <span class="material-symbols-outlined"> mail </span>
         </div>
+        <% if (typeof error !== "undefined" && error === "Email") { %>
+          <span class="mb-3 error-text"> Email is incorrect or doesn't exist</span>
+        <% } %> 
         <div class="textbox">
           <input
             id="password-signup"
@@ -20,6 +23,9 @@
           <label for="password-signup">password </label>
           <span class="material-symbols-outlined"> vpn_key </span>
         </div>
+        <% if (typeof error !== "undefined" && error === "Password") { %>
+          <span class="mb-3 error-text">Incorrect password</span>
+        <% } %>
         <button class="login-signup-btn" type="submit">login</button>
         <p>Don't have a account yet? Sign up <a href="/auth/signUp">here</a></p>
       </form>
