@@ -1,21 +1,24 @@
 <link rel="stylesheet" href="/stylesheets/profile.css" />
 
 <div class="container d-flex justify-content-between">
-  <section class="col-4">
-    <h1>profile</h1>
-    <p>currently logged in as: <%= user.firstName %></p>
-    <p class="address-check">
-      <%= typeof user.address === "undefined" ? "Please update your personal info"
-      : "" %>
+  <section class="col-4 d-flex flex-column align-items-center">
+    <h1>Your profile</h1>
+    <p>
+      currently logged in as:
+      <strong><%= user.firstName + " " + user.lastName %></strong>
     </p>
-  
+    <p class="address-check">
+      <%= typeof user.address === "undefined" ? "Please update your personal info" : "" %>
+    </p>
+
     <img
       class="pro-pic"
       src="https://api.dicebear.com/5.x/thumbs/svg?seed=<%= user.firstName %>&radius=30"
       alt="avatar"
     />
-  
+
     <form
+      class="col-12"
       method="post"
       action="<%= `/profile/update-infos/${user.firstName}-${user.lastName}` %>"
     >
@@ -54,17 +57,19 @@
       </div>
       <button class="m-3 btn" type="submit">Update your personal info</button>
     </form>
-  
+
     <form
+      class="col-12"
       method="post"
       action="<%= `/profile/update-address/${user.firstName}-${user.lastName}` %>"
     >
       <div class="row">
         <div class="col-4 form-group">
           <label for="profile-stnumber">House number:</label>
-          <input class="form-control" id="profile-stnumber" type="text" value="<%=
-          typeof user.address === "undefined" ? "" : user.address.houseNumber %>"
-          placeholder="221b" name="houseNumber" required/>
+          <input class="form-control" id="profile-stnumber" type="text"
+          value="<%= typeof user.address === "undefined" ? "" :
+          user.address.houseNumber %>" placeholder="221b" name="houseNumber"
+          required/>
         </div>
         <div class="col-8 form-group">
           <label for="profile-street">Street:</label>
@@ -87,7 +92,7 @@
           placeholder="London" name="city" required/>
         </div>
       </div>
-  
+
       <div class="form-group">
         <label for="profile-country">Country: </label>
         <input class="form-control" id="profile-country" type="text" value="<%=
@@ -97,63 +102,65 @@
       <button class="m-3 btn" type="submit">Update your profile info</button>
     </form>
   </section>
-  
-  <section class="col-7">
-    <h1>Your order history</h1>
-    <div class="accordion" id="panelsStayOpen">
 
+  <section class="col-6">
+    <h1>Your order history</h1>
+
+    <% if (orderHistory.length === 0) { %>
+     <h4>You still haven't placed any order.</h4>
+    <% } %>
+
+    <div class="accordion mb-5" id="accordion-user">
       <% orderHistory.forEach((order, ind) => { %>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="panelsStayOpen-heading<%= ind %>">
-            <button
-              class="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#panelsStayOpen-collapse<%= ind %>"
-              aria-expanded="true"
-              aria-controls="panelsStayOpen-collapse<%= ind %>"
-            >
-            <div class="inner-btn">
-              <div class="order-id">
-Order ID: <%= order._id %>
-              </div>
-              <div class="date">
-<%= order.createdAt.toLocaleDateString()%>
-              </div>
-            </div>
-               
-            </button>
-          </h2>
-          <div
-            id="panelsStayOpen-collapse<%= ind %>"
-            class="accordion-collapse collapse"
-            aria-labelledby="panelsStayOpen-heading<%= ind %>"
-            data-bs-parent="#accordionExample"
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="accordion-user-heading<%= ind %>">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#accordion-user-collapse<%= ind %>"
+            aria-expanded="true"
+            aria-controls="accordion-user-collapse<%= ind %>"
           >
-            <div class="accordion-body">
-              <% order.products.forEach(item => { %>
-                <!-- This is the container for every item in products array -->
-                <div class="d-flex justify-content-between mb-3">
-                  <div class="col-4">
-                    <img class="history-img" src="<%- item.product.images[0] %>" alt="<%= item.product.title %>">
-                  </div>
-                  <div class="col-7">
-                    <h3><%= item.product.title %></h3>
-                    <p>Qty: <%= item.amount %></p>
-                    <p>€<%= item.product.price * item.amount %></p>
-                  </div>
-                </div>
-                <% }) %>
-                <!-- and it ends here -->
-                <h4>Subtotal: <strong>€<%= order.totalPrice %></strong></h4>
+            <div class="inner-btn">
+              <div class="order-id">Order ID: <%= order._id %></div>
+              <div class="date"><%= order.createdAt.toLocaleDateString()%></div>
             </div>
+          </button>
+        </h2>
+        <div
+          id="accordion-user-collapse<%= ind %>"
+          class="accordion-collapse collapse"
+          aria-labelledby="accordion-user-heading<%= ind %>"
+        >
+          <div class="accordion-body">
+            <% order.products.forEach(item => { %>
+            <!-- This is the container for every item in products array -->
+            <div class="d-flex mb-3">
+              <div class="col-4">
+                <img
+                  class="history-img"
+                  src="<%- item.product.images[0] %>"
+                  alt="<%= item.product.title %>"
+                />
+              </div>
+              <div class="col-7">
+                <h5><strong><%= item.product.title %></strong></h5>
+                <p>Qty: <%= item.amount %></p>
+                <p>
+                  €<%= Number.parseFloat(item.product.price *
+                  item.amount).toFixed(2) %>
+                </p>
+              </div>
+            </div>
+            <hr />
+            <% }) %>
+            <!-- and it ends here -->
+            <h4>Subtotal: <strong>€<%= order.totalPrice %></strong></h4>
           </div>
         </div>
+      </div>
       <% }) %>
-
-
-
     </div>
   </section>
 </div>
-

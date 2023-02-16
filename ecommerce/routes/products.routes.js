@@ -59,6 +59,10 @@ router.get("/", async (req, res, next) => {
 
 // get route single product page
 router.get("/details/:id", async (req, res) => {
+  if (typeof req.session.cart === "undefined"){
+    req.session.cart = []
+  }
+
   if (req.session.open) {
     cartOpen = true
   } else {

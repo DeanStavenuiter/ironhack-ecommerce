@@ -1,43 +1,56 @@
 <link rel="stylesheet" href="/stylesheets/cart.css" />
 
-<div class="title">
-<h1> cart </h1>
-<% if (user.cart.length === 0) { %>
+<div class="title d-flex flex-column align-items-center">
+  <h1 class="mb-5">Shopping cart</h1>
+  <% if (user.cart.length === 0) { %>
   <h3>Your cart is still empty.</h3>
-  <button class="btn"><a href="/products">Check out our amazing products.</a></button>
- </div>
-<% } else { %> 
-
-<div class="container d-flex flex-wrap gap-5">
-    <% user.cart.forEach(item => { %>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="<%- item.product.images[0] %>" alt="<%= item.product.title %>">
-            <div class="card-body">
-              <h3 class="card-title"><%= item.product.title %></h3>
-              <form method="POST" action="/products/cart-update" data-form-auto-submit="true">
-                <input name="id" value="<%= item.product._id %>" type="text" hidden>
-                <select name="amount" onchange="this.form.submit()">
-                  <option value="1" <% if (item.amount === 1) { %> selected <% } %>>1</option>
-                  <option value="2" <% if (item.amount === 2) { %> selected <% } %>>2</option>
-                  <option value="3" <% if (item.amount === 3) { %> selected <% } %>>3</option>
-                  <option value="4" <% if (item.amount === 4) { %> selected <% } %>>4</option>
-                  <option value="5" <% if (item.amount === 5) { %> selected <% } %>>5</option>
-                  <option value="6" <% if (item.amount === 6) { %> selected <% } %>>6</option>
-                  <option value="7" <% if (item.amount === 7) { %> selected <% } %>>7</option>
-                  <option value="8" <% if (item.amount === 8) { %> selected <% } %>>8</option>
-                  <option value="9" <% if (item.amount === 9) { %> selected <% } %>>9</option>
-                  <option value="10" <% if (item.amount === 10) { %> selected <% } %>>10</option>
-                </select>
-              </form>
-              <form method="post" action="/products/cart-delete">
-                <input type="text" name="id" value="<%- item.product._id %>" hidden>
-                <button class="btn" type="submit">Remove from cart</button>
-                </form>
-            </div>
-          </div>
-          
-    <% }) %>
+  <button class="btn">
+    <a href="/products">Check out our amazing products.</a>
+  </button>
 </div>
-<button class="btn"><a href="/checkout">Checkout</a></button>
+<% } else { %>
+
+<main class="grid container d-flex flex-wrap justify-content-between gap-5">
+  <% user.cart.forEach(item => { %>
+  <div class="card" style="width: 17rem">
+    <img
+      class="card-img-top"
+      src="<%- item.product.images[0] %>"
+      alt="<%= item.product.title %>"
+    />
+    <div class="card-body">
+      <h5 class="card-title"><strong><%= item.product.title %></strong></h5>
+      <p>€<%= item.product.price %></p>
+      <form
+        method="POST"
+        action="/products/cart-update"
+        data-form-auto-submit="true"
+      >
+        <input name="id" value="<%= item.product._id %>" type="text" hidden />
+        <select class="form-select mb-3" name="amount" onchange="this.form.submit()">
+          <option value="1" <% if (item.amount === 1) { %> selected <% } %>>1
+          <option value="2" <% if (item.amount === 2) { %> selected <% } %>>2
+          <option value="3" <% if (item.amount === 3) { %> selected <% } %>>3
+          <option value="4" <% if (item.amount === 4) { %> selected <% } %>>4
+          <option value="5" <% if (item.amount === 5) { %> selected <% } %>>5
+          <option value="6" <% if (item.amount === 6) { %> selected <% } %>>6
+          <option value="7" <% if (item.amount === 7) { %> selected <% } %>>7
+          <option value="8" <% if (item.amount === 8) { %> selected <% } %>>8
+          <option value="9" <% if (item.amount === 9) { %> selected <% } %>>9
+          <option value="10" <% if (item.amount === 10) { %> selected <% } %>>10
+        </select>
+      </form>
+      <% let itemPrice = item.product.price * item.amount %>
+      <p>Total: <strong>€<%= Number.parseFloat(itemPrice).toFixed(2) %></strong></p>
+      <form method="post" action="/products/cart-delete">
+        <input type="text" name="id" value="<%- item.product._id %>" hidden />
+        <button class="btn btn-block" type="submit">Remove from cart</button>
+      </form>
+    </div>
+  </div>
+
+  <% }) %>
+</main>
+<button class="btn" id="checkout-btn"><a href="/checkout">Checkout</a></button>
 <% } %>
-<noscript><input type="submit" value="Submit"></noscript>
+<noscript><input type="submit" value="Submit" /></noscript>

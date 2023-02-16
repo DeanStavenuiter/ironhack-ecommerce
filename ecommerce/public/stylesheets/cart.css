@@ -1,12 +1,24 @@
-.title{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.title h1 {
     text-align: center;
-    width: 0px auto;
 }
 
-.btn{
-    width: 25%;
+.grid::after {
+  content: "";
+  flex: auto;
+}
+
+.card-title{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card {
+  border: none;
+}
+
+#checkout-btn {
+    position: fixed;
+    left: 5%;
+    top: 30%;
 }

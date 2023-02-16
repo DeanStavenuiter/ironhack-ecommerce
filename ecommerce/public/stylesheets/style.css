@@ -10,10 +10,11 @@ html{
   height: 100%;
 }
 
-.pro-pic {
-  width: 200px;
-}
-
 .btn{
   background-color: #d0d0d0;
+}
+
+.pro-pic {
+  width: 200px;
+  margin-bottom: 2rem;
 }

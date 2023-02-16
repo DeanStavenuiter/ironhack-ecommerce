@@ -1,47 +1,47 @@
-<h1>create a new product</h1>
-
-<form method="POST" action="/admin/create">
-  <div>
-    <label for="title">title:</label>
-    <input id="title" type="text" name="title" required />
-  </div>
-  <div>
-    <label for="size">size:</label>
-    <input id="size" type="text" name="size" required />
-  </div>
-  <div>
-    <label for="type">type:</label>
-    <select name="type" id="type">
-        <option value="t-shirt">t-shirt</option>
-        <option value="sweater">sweater</option>
-        <option value="jeans">jeans</option>
-        <option value="shoes">shoes</option>
-        <option value="jacket">jacket</option>
-        <option value="hat">hat</option>
-        <option value="blouse">blouse</option>
-        <option value="chinos">chinos</option>
-        <option value="socks">socks</option>
-    </select>
-  </div>
-  <div>
-    <label for="price">price:</label>
-    <input id="price" type="text" name="price" required />
-  </div>
-  <div>
-    <label for="productDetails">productDetails:</label>
-    <input id="productDetails" type="text" name="productDetails" />
-  </div>
-  <div>
-    <label for="available">available:</label>
-    <select name="available" id="available" name="available">
-        <option value="true">true</option>
-        <option value="false">false</option>
-    </select>
-
-  </div>
-  <div>
-    <label for="images">images:</label>
-    <input id="images" type="text" name="images" />
-  </div>
-<button type="submit"> create new product</button>
-</form>
+<main class="d-flex flex-column align-items-center">
+  <h1 class="mb-5">create a new product</h1>
+  <form class="w-25" method="POST" action="/admin/create">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input class="form-control" id="title" type="text" name="title" required />
+    </div>
+    <div class="form-group">
+      <label for="size">Size:</label>
+      <input class="form-control" id="size" type="text" name="size" required />
+    </div>
+    <div class="form-group">
+      <label for="type">Type:</label>
+      <select class="form-select" name="type" id="type">
+        <option value="t-shirt">T-shirt</option>
+        <option value="sweater">Sweater</option>
+        <option value="jeans">Jeans</option>
+        <option value="shoes">Shoes</option>
+        <option value="jacket">Jacket</option>
+        <option value="hat">Hat</option>
+        <option value="blouse">Blouse</option>
+        <option value="chinos">Chinos</option>
+        <option value="socks">Socks</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input class="form-control" id="price" type="text" name="price" required />
+    </div>
+    <div class="form-group">
+      <label for="productDetails">Product details:</label>
+      <input class="form-control" id="productDetails" type="text" name="productDetails" />
+    </div>
+    <div class="form-group">
+      <label for="available">Available:</label>
+      <select class="form-select" name="available" id="available" name="available">
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="images">Images:</label>
+      <input class="form-control" id="images" type="text" name="images" />
+    </div>
+    <button class="mt-3" type="submit">create new product</button>
+  </form>
+</main>

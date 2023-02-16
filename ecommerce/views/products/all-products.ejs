@@ -1,20 +1,20 @@
 <link rel="stylesheet" href="/stylesheets/all-products.css" />
 <div class="title">
-  <h1>all products</h1>
+  <h1 class="mb-5">All products</h1>
 </div>
 <%- include('../partials/modal.ejs') %>
 <%- include('../partials/filters.ejs') %>
-<div class="container d-flex flex-wrap">
+<div class="grid container d-flex flex-wrap justify-content-between">
   <% allProducts.forEach(product => { %>
-  <div class="card m-4" style="width: 18rem">
+  <div class="card m-4" style="width: 17rem">
     <img
       class="card-img-top img-fluid rounded"
       src="<%- product.images[0] %>"
       alt="<%= product.title %>"
     />
     <div class="card-body">
-      <h5 class="card-title"><%= product.title %></h5>
-
+      <h5 class="card-title"><strong><%= product.title %></strong></h5>
+      <p>€<%= product.price %></p>
       <div class="buttons">
         <form method="post" action="/products/cart-add">
           <input type="text" name="id" value="<%- product.id %>" hidden />

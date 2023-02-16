@@ -1,5 +1,6 @@
 .history-img {
-    width: 100%;
+    width: 50%;
+    object-fit: contain;
 }
 
 .inner-btn{
@@ -7,8 +8,4 @@
     justify-content: space-between;
     width: 100%;
     margin-right: 15px;
-}
-
-.btn{
-    
 }

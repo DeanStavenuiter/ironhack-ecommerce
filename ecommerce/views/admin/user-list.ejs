@@ -3,7 +3,7 @@
 <div class="user-list">
   <section class="col-7">
     <div class="title">
-      <h1>all users</h1>
+      <h1 class="mb-5">All users</h1>
     </div>
     <div class="accordion accordion-collapse" id="accordion-users">
       <% findAllUsers.forEach((user, ind) => { %>
@@ -17,29 +17,46 @@
             aria-expanded="true"
             aria-controls="accordion-users-collapse<%= ind %>"
           >
-            <span>Name: <a href="/admin/user-list/<%- user.id %>"><b><%= user.firstName %> <%= user.lastName %></b></a></span> 
+            <span
+              >Name:
+              <a href="/admin/user-list/<%- user.id %>"
+                ><b><%= user.firstName %> <%= user.lastName %></b></a
+              ></span
+            >
           </button>
         </h2>
         <div
           id="accordion-users-collapse<%= ind %>"
           class="accordion-collapse collapse"
           aria-labelledby="accordion-users-heading<%= ind %>"
-          data-bs-parent="#accordion-users"
         >
           <div class="accordion-body">
             <div class="user-details">
               <div class="name-email">
-              <p>First name: <%- user.firstName %></p>
-              <p>Last name: <%- user.lastName %></p>
-              <p>Email: <%- user.email %></p>
-              <p>Account created at: <%- user.createdAt.toLocaleDateString() %></p>
+                <p>First name: <%- user.firstName %></p>
+                <p>Last name: <%- user.lastName %></p>
+                <p>Email: <%- user.email %></p>
+                <p>
+                  Account created at: <%- user.createdAt.toLocaleDateString() %>
+                </p>
               </div>
-            <div class="address">
-              <p>street: <%- user.address.street ? user.address.street : "n/a" %></p>
-              <p>house number: <%- user.address.houseNumber ? user.address.houseNumber : "n/a" %></p>
-              <p>city: <%- user.address.city ? user.address.city : "n/a" %></p>
-              <p>country: <%- user.address.country ? user.address.country : "n/a" %></p>
-            </div>
+              <div class="address">
+                <p>
+                  street: <%- user.address.street ? user.address.street : "n/a"
+                  %>
+                </p>
+                <p>
+                  house number: <%- user.address.houseNumber ?
+                  user.address.houseNumber : "n/a" %>
+                </p>
+                <p>
+                  city: <%- user.address.city ? user.address.city : "n/a" %>
+                </p>
+                <p>
+                  country: <%- user.address.country ? user.address.country :
+                  "n/a" %>
+                </p>
+              </div>
             </div>
           </div>
         </div>
