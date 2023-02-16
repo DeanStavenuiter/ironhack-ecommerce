@@ -9,7 +9,6 @@ const UserModel = require("../models/User.model");
 router.get("/", isLoggedIn, isAdmin, async (req, res) => {
   try {
     res.render("admin/panel", {
-      layout: "../views/layout-admin.ejs",
       user: req.session.user,
       cart: req.session.cart,
     });
@@ -21,7 +20,6 @@ router.get("/", isLoggedIn, isAdmin, async (req, res) => {
 // get route create new product
 router.get("/create", isLoggedIn, isAdmin, (req, res) => {
   res.render("admin/create", {
-    layout: "../views/layout-admin.ejs",
     user: req.session.user,
     cart: req.session.cart,
   });

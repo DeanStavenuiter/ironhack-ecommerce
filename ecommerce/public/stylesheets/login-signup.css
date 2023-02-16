@@ -11,20 +11,9 @@
     height: 75%;
 }
 
-img:nth-child(1) {
-  position: absolute;
-  height: 100vh;
-  left: 100px;
-}
-img:nth-child(2) {
-  position: absolute;
-  height: 100vh;
-  right: 100px;
-}
-
 .login {
   position: relative;
-  background-color: #4c4c4c;
+  background-color: #475e85;
   width: 375px;
   border-radius: 5px;
   margin: auto;
@@ -35,6 +24,7 @@ img:nth-child(2) {
 h4,
 form {
   padding-left: 16px;
+  color: rgba(255, 255, 255, 0.631);
 }
 .login > h1 {
   padding-top: 16px;
@@ -60,15 +50,16 @@ form {
   font-size: 22px;
   pointer-events: none;
   padding-left: 5px;
-  color: rgb(255 255 255 / 40%);
+  color: #7e8da6;
 }
 
 .textbox input {
   padding: 0 24px 0 36px;
-  border: 2px solid #2b3442;
+  border: 2px solid #33435e;
   border-radius: 5px;
   color: rgb(255 255 255 / 96%);
   height: 52px;
+  background-color: #475e85;
 }
 
 :is(input:focus, input:valid) ~ label {
@@ -77,13 +68,13 @@ form {
 }
 
 input:focus ~ label {
-  color: #d2b103;
-  background-color: rgb(76, 76, 76);
+  color: #7e8da6;
+  background-color: #475e85;
   padding: 0 3px;
 }
 
 input:focus {
-  border-color: #d2b103;
+  border-color: #122b56;
 }
 
 :is(input:focus, input:valid) ~ span {
@@ -96,7 +87,7 @@ input:focus {
   left: 36px;
   translate: 0 -40%;
   color: rgb(255 255 255 / 40%);
-  background-color: #4c4c4c;
+  background-color: #475e85;
   pointer-events: none;
   transition: 0.4s;
 }
@@ -121,23 +112,24 @@ p a {
 }
 
 p a:hover {
-  color: #d2b103;
+  color: #122b56;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #4c4c4c inset !important;
+  -webkit-box-shadow: 0 0 0 30px #475e85 inset !important;
   -webkit-text-fill-color: rgb(255 255 255 / 96%);
 }
 
 .login-signup-btn{
     border-radius: 5px;
-    border: 2px solid #2b3442;
+    border: 2px solid #33435e;
     color: rgb(255 255 255 / 40%);
+    background-color: #566e98;
 }
 
 .login-signup-btn:hover{
-    color: #d2b103;
+    color: #122b56;
 }

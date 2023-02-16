@@ -21,3 +21,12 @@
     text-align: center;
     width: 0 auto;
 }
+
+h2 {
+    width: 100%;
+    text-align: center;
+}
+
+#main-products {
+    min-height: 58vh;
+}

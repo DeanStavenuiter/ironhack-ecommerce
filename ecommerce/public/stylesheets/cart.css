@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.cart-main {
+  min-height: 48vh;
+}
+
 .card-title{
   text-overflow: ellipsis;
   white-space: nowrap;

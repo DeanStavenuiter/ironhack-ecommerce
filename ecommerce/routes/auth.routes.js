@@ -83,10 +83,10 @@ router.post("/login", isLoggedOut, async (req, res) => {
       
       res.redirect(`/profile/${user.firstName.split(" ").join("")}-${user.lastName.split(" ").join("")}`);
     } else {
-      res.render("auth/login", {error: "Password not found"}, {user: req.session.user})
+      res.render("auth/login", {error: "Password", user: req.session.user})
     }
   } else {
-    res.render("auth/login", {error: "Username not found"}, {user: req.session.user})
+    res.render("auth/login", {error: "Email", user: req.session.user})
   }
 });
 

@@ -1,35 +1,42 @@
 <link rel="stylesheet" href="/stylesheets/all-products.css" />
-<div class="title">
-  <h1 class="mb-5">All products</h1>
-</div>
-<%- include('../partials/modal.ejs') %>
-<%- include('../partials/filters.ejs') %>
-<div class="grid container d-flex flex-wrap justify-content-between">
-  <% allProducts.forEach(product => { %>
-  <div class="card m-4" style="width: 17rem">
-    <img
-      class="card-img-top img-fluid rounded"
-      src="<%- product.images[0] %>"
-      alt="<%= product.title %>"
-    />
-    <div class="card-body">
-      <h5 class="card-title"><strong><%= product.title %></strong></h5>
-      <p>€<%= product.price %></p>
-      <div class="buttons">
-        <form method="post" action="/products/cart-add">
-          <input type="text" name="id" value="<%- product.id %>" hidden />
-          <input type="text" name="cartOpen" value="true" hidden />
-          <button class="btn btn-block btn-buy" type="submit">
-            Add to cart
-          </button>
-        </form>
+<main id="main-products">
+  <div class="title">
+    <h1 class="mb-5">All products</h1>
+  </div>
+  <%- include('../partials/modal.ejs') %> <%- include('../partials/filters.ejs')
+  %>
 
-        <a href="/products/details/<%- product.id %>">
-          <button class="btn btn-block btn-buy" type="submit">details</button>
-        </a>
+
+<div class="grid container d-flex flex-wrap justify-content-between">
+    <% if (allProducts.length === 0) { %>
+        <h2>No product matches your filters</h2>
+    <% } %>
+    <% allProducts.reverse().forEach(product => { %>
+    <div class="card m-4" style="width: 17rem">
+      <img
+        class="card-img-top img-fluid rounded"
+        src="<%- product.images[0] %>"
+        alt="<%= product.title %>"
+      />
+      <div class="card-body">
+        <h5 class="card-title"><strong><%= product.title %></strong></h5>
+        <p>€<%= product.price %></p>
+        <div class="buttons">
+          <form method="post" action="/products/cart-add">
+            <input type="text" name="id" value="<%- product.id %>" hidden />
+            <input type="text" name="cartOpen" value="true" hidden />
+            <button class="btn btn-block btn-buy" type="submit">
+              Add to cart
+            </button>
+          </form>
+
+          <a href="/products/details/<%- product.id %>">
+            <button class="btn btn-block btn-buy" type="submit">details</button>
+          </a>
+        </div>
       </div>
     </div>
+    <% }) %>
   </div>
-  <% }) %>
-</div>
+</main>
 <script src="/js/modal.js"></script>

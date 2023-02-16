@@ -2,7 +2,7 @@
 
 <h1 class="mb-5">Checkout page</h1>
 
-<main class="container d-flex justify-content-between">
+<main id="main-checkout" class="container d-flex justify-content-between">
   <% let subtotal = 0 %>
   <form class="col-5" method="post" action="<%= `/checkout/register` %>">
     <h3>Please fill all the fields in the address form to proceed to the payment page</h3>
@@ -67,6 +67,5 @@
       <% }) %>
       <p>Subtotal: <strong>€ <%= Number.parseFloat(subtotal).toFixed(2) %></strong></p>
     </div>
-  
   </section>
 </main>

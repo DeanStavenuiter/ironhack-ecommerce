@@ -3,14 +3,16 @@
 <div class="title d-flex flex-column align-items-center">
   <h1 class="mb-5">Shopping cart</h1>
   <% if (user.cart.length === 0) { %>
-  <h3>Your cart is still empty.</h3>
-  <button class="btn">
-    <a href="/products">Check out our amazing products.</a>
-  </button>
+    <main class="cart-main">
+      <h3>Your cart is still empty.</h3>
+      <button class="btn">
+        <a href="/products">Check out our amazing products.</a>
+      </button>
+    </main>
 </div>
 <% } else { %>
 
-<main class="grid container d-flex flex-wrap justify-content-between gap-5">
+<main class="grid cart-main container d-flex flex-wrap justify-content-between gap-5">
   <% user.cart.forEach(item => { %>
   <div class="card" style="width: 17rem">
     <img
