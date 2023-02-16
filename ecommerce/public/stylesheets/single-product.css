@@ -1,6 +1,3 @@
-.product-section {
-  display: flex;
-}
 .product-info,
 .product-img-big {
   width: 50%;
@@ -30,6 +27,7 @@
 
 .img-list > li > img{
   height: 100%;
+  width: 4.5rem;
 }
 .product-info {
   padding-left: 50px;

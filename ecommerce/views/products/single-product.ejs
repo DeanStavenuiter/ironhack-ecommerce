@@ -1,6 +1,5 @@
 <%- include('../partials/modal.ejs') %>
-<main class="main-product-page">
-    <div class="product-section">
+<main class="main-product-page d-flex container">
       <div class="product-img-big">
         <img class="img-fluid big-img" src="<%= product.images[0] %>" alt="<%= product.title%>" />
         <div class="product-img-small">
@@ -8,7 +7,6 @@
             <% product.images.forEach(image => { %>
              <li class="single-img"><img src="<%= image %>" alt="<%= product.title%>"></li>
             <% }) %>
-            <li><img src="" alt=""></li>
           </ul>
         </div>
       </div>

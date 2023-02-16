@@ -3,8 +3,6 @@ footer {
     margin-top: 100px;
     border-top: 5px solid #E8E8E8;
     background-color: #34435E;
-    position: relative;
-    bottom: 0;
     height: 230px;
     width: 100%;
 }
@@ -23,6 +21,6 @@ ul {
 }
 
 .socials img {
-    width: 20px;
+    width: 15px;
     object-fit: contain;
 }

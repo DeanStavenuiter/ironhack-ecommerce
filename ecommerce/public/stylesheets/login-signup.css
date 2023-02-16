@@ -11,17 +11,6 @@
     height: 75%;
 }
 
-img:nth-child(1) {
-  position: absolute;
-  height: 100vh;
-  left: 100px;
-}
-img:nth-child(2) {
-  position: absolute;
-  height: 100vh;
-  right: 100px;
-}
-
 .login {
   position: relative;
   background-color: #475e85;
