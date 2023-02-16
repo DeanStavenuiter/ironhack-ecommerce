@@ -2,11 +2,6 @@
     text-align: center;
 }
 
-.grid::after {
-  content: "";
-  flex: auto;
-}
-
 .card-title{
   text-overflow: ellipsis;
   white-space: nowrap;

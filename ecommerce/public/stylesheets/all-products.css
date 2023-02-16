@@ -2,10 +2,6 @@
     border: none;
 }
 
-.btn{
-    background-color: #d0d0d0;
-}
-
 .card-title{
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -25,8 +21,3 @@
     text-align: center;
     width: 0 auto;
 }
-
-.grid::after {
-    content: "";
-    flex: auto;
-  }
