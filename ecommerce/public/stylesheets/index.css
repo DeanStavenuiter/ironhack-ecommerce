@@ -1,6 +1,27 @@
-.title{
+.main-home {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: ;
+  width: 100%;
+}
+.img-main {
+  display: flex;
+}
+.img-main img {
+  width: 50%;
+}
+.text-img {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+}
+
+.text-img p {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    width: 0 auto;
+}
+
+.text-outer{
+    display: flex;
 }
