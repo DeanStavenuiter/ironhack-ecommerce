@@ -5,7 +5,7 @@ footer {
     background-color: #34435E;
     position: relative;
     bottom: 0;
-    height: 250px;
+    height: 230px;
     width: 100%;
 }
 
@@ -20,4 +20,9 @@ h5 {
 
 ul {
     padding: 0;
+}
+
+.socials img {
+    width: 20px;
+    object-fit: contain;
 }
