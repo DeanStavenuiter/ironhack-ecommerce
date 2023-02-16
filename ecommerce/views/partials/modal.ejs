@@ -90,9 +90,10 @@
             €<%- Number.parseFloat(subtotal).toFixed(2) %>
         </div>
       </div>
-      <div class="checkout-btn">
-        <a href="/checkout"><button class="btn">checkout</button></a>
-        
-      </div>
+      <% if (cart.length !== 0) { %>
+        <div class="checkout-btn">
+      <a href="/checkout"><button class="btn">checkout</button></a>
+    </div>
+    <% } %>
   </div>
 <div class="modal-backdrop modal-backdrop-open <%= cartOpen ? '' : 'hide' %>"></div>
