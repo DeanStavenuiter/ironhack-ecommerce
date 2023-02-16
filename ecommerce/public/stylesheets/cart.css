@@ -15,9 +15,3 @@
 .card {
   border: none;
 }
-
-#checkout-btn {
-    position: fixed;
-    left: 5%;
-    top: 30%;
-}
