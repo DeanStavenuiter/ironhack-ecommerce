@@ -68,36 +68,32 @@
           <label for="profile-stnumber">House number:</label>
           <input class="form-control" id="profile-stnumber" type="text"
           value="<%= typeof user.address === "undefined" ? "" :
-          user.address.houseNumber %>" placeholder="221b" name="houseNumber"
+          user.address.houseNumber %>" name="houseNumber"
           required/>
         </div>
         <div class="col-8 form-group">
           <label for="profile-street">Street:</label>
           <input class="form-control" id="profile-street" type="text" value="<%=
-          typeof user.address === "undefined" ? "" : user.address.street %>"
-          placeholder="Baker Street" name="street" required/>
+          typeof user.address === "undefined" ? "" : user.address.street %>" name="street" required/>
         </div>
       </div>
       <div class="row">
         <div class="col-4 form-group">
           <label for="profile-pcode">Postal code: </label>
           <input class="form-control" id="profile-pcode" type="text" value="<%=
-          typeof user.address === "undefined" ? "" : user.address.postalCode %>"
-          placeholder="NW1 6XE" name="postalCode" required/>
+          typeof user.address === "undefined" ? "" : user.address.postalCode %>" name="postalCode" required/>
         </div>
         <div class="col-8 form-group">
           <label for="profile-city">City: </label>
           <input class="form-control" id="profile-city" type="text" value="<%=
-          typeof user.address === "undefined" ? "" : user.address.city %>"
-          placeholder="London" name="city" required/>
+          typeof user.address === "undefined" ? "" : user.address.city %>" name="city" required/>
         </div>
       </div>
 
       <div class="form-group">
         <label for="profile-country">Country: </label>
         <input class="form-control" id="profile-country" type="text" value="<%=
-        typeof user.address === "undefined" ? "" : user.address.country %>"
-        placeholder="United Kingdom" name="country" required/>
+        typeof user.address === "undefined" ? "" : user.address.country %>" name="country" required/>
       </div>
       <button class="m-3 btn" type="submit">Update your profile info</button>
     </form>
