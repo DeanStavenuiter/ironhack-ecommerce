@@ -13,11 +13,12 @@
     <% } %>
     <% allProducts.reverse().forEach(product => { %>
     <div class="card m-4" style="width: 17rem">
-      <img
+      <a href="/products/details/<%- product.id %>"><img
         class="card-img-top img-fluid rounded"
         src="<%- product.images[0] %>"
         alt="<%= product.title %>"
-      />
+      /></a>
+      
       <div class="card-body">
         <h5 class="card-title"><strong><%= product.title %></strong></h5>
         <p>€<%= product.price %></p>
@@ -26,7 +27,7 @@
             <input type="text" name="id" value="<%- product.id %>" hidden />
             <input type="text" name="cartOpen" value="true" hidden />
             <button class="btn btn-block btn-buy" type="submit">
-              Add to cart
+              add to cart
             </button>
           </form>
 

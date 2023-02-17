@@ -34,7 +34,15 @@ router.get("/", async (req, res, next) => {
   // If there's no filter and the query is empty we want to display all the products in the DB
   if (Object.keys(req.query).length === 0) {
     allProducts = await ProductModel.find();
-  }
+  } 
+  // BACKLOG - FOR THE SORTING BUTTONS
+  // else if (req.query.sort === "up") {
+  //     allProducts = await ProductModel.find().sort({price: -1});
+  //   } 
+  // else if (req.query.sort === "down") {
+  //       allProducts = await ProductModel.find().sort({price: 1});
+  //     }
+  
   // Otherwise we apply the filter queries
   else {
     const query = {
@@ -43,7 +51,7 @@ router.get("/", async (req, res, next) => {
         { price: { $lte: priceQuery } },
       ],
     };
-    allProducts = await ProductModel.find(query);
+    allProducts = await ProductModel.find(query).sort({price: -1});
   }
   delete req.session.open
 
