@@ -5,25 +5,31 @@
     <h1>signup</h1>
     <form method="post" action="/auth/signup">
       <div class="textbox">
-        <input id="firstname-signup" type="text" name="firstName" required />
+        <input id="firstname-signup" value="<%= typeof error !== "undefined" ? userData.firstName : "" %>" type="text" name="firstName" required />
         <label for="firstname-signup">first name</label>
         <span class="material-symbols-outlined"> badge </span>
       </div>
       <div class="textbox">
-        <input id="lastname-signup" type="text" name="lastName" required />
+        <input id="lastname-signup" value="<%= typeof error !== "undefined" ? userData.lastName : "" %>" type="text" name="lastName" required />
         <label for="lastname-signup">last name</label>
         <span class="material-symbols-outlined"> badge </span>
       </div>
       <div class="textbox">
-        <input id="email-signup" type="text" name="email" required />
+        <input id="email-signup" value="<%= typeof error !== "undefined" && error === "password" ? userData.email : "" %>" type="text" name="email" required />
         <label for="email-signup">email </label>
         <span class="material-symbols-outlined"> mail </span>
       </div>
+      <% if (typeof error !== "undefined" && error === "email") { %>
+        <output class="mb-3 error-text">Email already in use</output>
+      <% } %>
       <div class="textbox">
         <input id="password-signup" type="password" name="password" required />
         <label for="password-signup">password </label>
         <span class="material-symbols-outlined"> vpn_key </span>
       </div>
+      <% if (typeof error !== "undefined" && error === "password") { %>
+        <output class="mb-3 error-text">Password has to be at least 6 characters long</output>
+      <% } %>
       <button class="login-signup-btn" type="submit">create an account</button>
       <p>Already have a account? login <a href="/auth/login">here</a></p>
     </form>
